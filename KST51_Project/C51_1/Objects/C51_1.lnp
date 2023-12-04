@@ -1,0 +1,18 @@
+".\Objects\main.obj",
+".\Objects\LED.obj",
+".\Objects\Delay.obj",
+".\Objects\BEEP.obj",
+".\Objects\smg.obj",
+".\Objects\key.obj",
+".\Objects\hc595.obj",
+".\Objects\step_motor.obj",
+".\Objects\EXTI.obj",
+".\Objects\uart.obj",
+".\Objects\iic.obj",
+".\Objects\EEPROM.obj",
+".\Objects\time.obj",
+".\Objects\ds18b20.obj",
+".\Objects\ds1302.obj",
+".\Objects\ired.obj" 
+TO ".\Objects\C51_1" 
+PRINT(".\Listings\C51_1.m51") RAMSIZE(256) 

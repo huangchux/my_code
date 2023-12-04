@@ -1,0 +1,122 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              10/24/2023 17:38:09 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: E:\keil1\C51\BIN\C51.EXE USER\main.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\APP;.\USER) DEBUG OBJECTEXTE
+                    -ND PRINT(.\Listings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "AllHead.h"
+   2          
+   3          sbit ADDR0 = P0^0;
+   4          sbit ADDR1 = P0^1;
+   5          sbit ADDR2 = P0^2;
+   6          sbit ADDR3 = P0^3;
+   7          sbit ENLED = P0^4;
+   8          
+   9          void main()
+  10          {
+  11   1        EA = 1;     //使能总中断
+  12   1        ES = 1;     //使能串口中断
+  13   1        ADDR3 = 1;
+  14   1        ENLED = 0;
+  15   1        ADDR2 = 1;
+  16   1        ADDR1 = 1;
+  17   1        ADDR0 = 0;
+  18   1        P0 = 0xFF;
+  19   1        UAER_Init(9600);
+  20   1        while(1)
+  21   1        {
+  22   2          if(flag)
+  23   2          {
+  24   3            if(strcmp(rec_buf,"open") == 0)
+  25   3            {
+  26   4              P0 = 0x00;
+  27   4            }
+  28   3            if(strcmp(rec_buf,"close") == 0)
+  29   3            {
+  30   4              P0 = 0xFF;
+  31   4            }
+  32   3            flag = 0;
+  33   3          }
+  34   2        }
+  35   1      }
+  36          
+  37          
+  38          
+  39          
+  40          //void Key_Action(u8 keycode);
+  41          //void SetDACOut(unsigned char val);
+  42          
+  43          //void main()
+  44          //{
+  45          //  Time0_Init(1);  //T0 定时 1ms
+  46          
+  47          //  while(1)
+  48          //  {
+  49          //    Key_Driver();
+  50          //  }
+  51          //}
+  52          
+  53          ///* 按键动作函数，根据键码执行相应的操作，keycode-按键键码 */
+  54          //void Key_Action(u8 keycode)
+C51 COMPILER V9.60.7.0   MAIN                                                              10/24/2023 17:38:09 PAGE 2   
+
+  55          //{
+  56          // static u8 volt = 0; //输出电压值，隐含了一位十进制小数位
+  57          // 
+  58          // if (0x26 == keycode) //向上键，增加 0.1V 电压值
+  59          // {
+  60          //  if (volt < 25)
+  61          //  {
+  62          //    volt++;
+  63          //    SetDACOut(volt * 255 / 25); //转换为 AD 输出值
+  64          //  }
+  65          // }
+  66          // else if (keycode == 0x28) //向下键，减小 0.1V 电压值
+  67          // {
+  68          //    if (volt > 0)
+  69          //    {
+  70          //      volt--;
+  71          //      SetDACOut(volt * 255 / 25); //转换为 AD 输出值
+  72          //    }
+  73          //  }
+  74          //}
+  75          
+  76          ///* 设置 DAC 输出值，val-设定值 */
+  77          //void SetDACOut(unsigned char val)
+  78          //{
+  79          // I2C_Start();
+  80          // if (!I2C_Write(0x90)) //寻址 PCF8591，如未应答，则停止操作并返回
+  81          // {
+  82          //   I2C_Stop();
+  83          //   return;
+  84          // }
+  85          // I2C_Write(0x40); //写入控制字节
+  86          // I2C_Write(val); //写入 DA 值 
+  87          // I2C_Stop();
+  88          //}
+  89          
+  90          ///* T0 中断服务函数，执行数码管扫描显示 */
+  91          //void time0() interrupt 1
+  92          //{
+  93          //  TH0 = T0RH;      //加载T0重载值
+  94          //  TL0 = T0RL;
+  95          //  Key_Scan(); //按键扫描
+  96          //}
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     72    ----
+   CONSTANT SIZE    =     11    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,109 @@
+C51 COMPILER V9.60.7.0   LCD1602                                                           10/24/2023 16:02:05 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE LCD1602
+OBJECT MODULE PLACED IN .\Objects\Lcd1602.obj
+COMPILER INVOKED BY: E:\keil1\C51\BIN\C51.EXE APP\Lcd1602.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\APP;.\USER) DEBUG OBJECTEX
+                    -TEND PRINT(.\Listings\Lcd1602.lst) TABS(2) OBJECT(.\Objects\Lcd1602.obj)
+
+line level    source
+
+   1          //#include "AllHead.h"
+   2          
+   3          ///* 等待液晶准备好 */
+   4          //void Lcd_WaitReady() //读状态：RS = L，R/W = H，E = H
+   5          //{
+   6          //  u8 sta = 0;
+   7          //  LCD1602_DB = 0xFF; 
+   8          //  LCD1602_RS = 0;
+   9          //  LCD1602_RW = 1;
+  10          //  do                   //do while语句是先执行一次语句，再对循环条件进行判断
+  11          //  {
+  12          //    LCD1602_E = 1;     //使能
+  13          //    sta = LCD1602_DB;  //读取状态字
+  14          //    LCD1602_E = 0;     //读完撤销使能，防止液晶输出数据干扰 P0 总线
+  15          //  }while(sta & 0x80);  //最高位等于 1 表示液晶正忙，重复检测直到其等于 0 为止
+  16          //}
+  17          
+  18          ///* 向 LCD1602 液晶写入一字节命令，cmd-待写入命令值 */
+  19          //void Lcd_WriteCmd(u8 cmd) //写指令：RS = L，R/W = L，D0~D7 = 指令码，E = 高脉冲
+  20          //{
+  21          //  Lcd_WaitReady();
+  22          //  LCD1602_RS = 0;
+  23          //  LCD1602_RW = 0;
+  24          //  LCD1602_DB = cmd;
+  25          //  LCD1602_E = 1;
+  26          //  LCD1602_E = 0;
+  27          //}
+  28          
+  29          ///* 向 LCD1602 液晶写入一字节数据，dat-待写入数据值 */
+  30          //void Lcd_WriteDat(u8 dat) //写数据：RS = H，R/W = L，D0~D7 = 数据，E = 高脉冲
+  31          //{
+  32          //  Lcd_WaitReady();
+  33          //  LCD1602_RS = 1;
+  34          //  LCD1602_RW = 0;
+  35          //  LCD1602_DB = dat;
+  36          //  LCD1602_E = 1;
+  37          //  LCD1602_E = 0;
+  38          //}
+  39          
+  40          ///* 设置显示 RAM 起始地址，亦即光标位置，(x,y)-对应屏幕上的字符坐标 */
+  41          //void Lcd_SetCursor(u8 x, u8 y)
+  42          //{
+  43          //  u8 addr;
+  44          //  if(0 == y)          //由输入的屏幕坐标计算显示RAM的地址
+  45          //  {
+  46          //    addr = 0x00 + x;  //第一行字符地址从0x00起始
+  47          //  }
+  48          //  else
+  49          //  {
+  50          //    addr = 0x40 + x;  //第二行字符地址从0x40起始
+  51          //  }
+  52          //  Lcd_WriteCmd(addr | 0x80); //设置RAM地址
+  53          //}
+  54          
+C51 COMPILER V9.60.7.0   LCD1602                                                           10/24/2023 16:02:05 PAGE 2   
+
+  55          ///* 在液晶上显示字符串，(x,y)-对应屏幕上的起始坐标，str-字符串指针 */
+  56          //void Lcd_ShowStr(u8 x, u8 y, u8 *str)
+  57          //{
+  58          //  Lcd_SetCursor(x,y);  //设置起始地址
+  59          //  while(*str != '\0')         
+  60          //  {
+  61          //    Lcd_WriteDat(*str++); //先取str指向的数据然后进入写数据函数，然后str自加1,优先级一样从右往左
+  62          //  }
+  63          //}
+  64          
+  65          ///* 区域清除，清除从(x,y)坐标起始的 len 个字符位 */
+  66          ////void Lcd_AreaClear(u8 x, u8 y, u8 len)
+  67          ////{
+  68          ////  Lcd_SetCursor(x,y);  //设置起始地址
+  69          ////  while(len--)         //连续写入空格
+  70          ////  {
+  71          ////    Lcd_WriteDat(' ');
+  72          ////  }
+  73          ////}
+  74          
+  75          ///* 初始化 1602 液晶 */
+  76          //void Lcd1602_Init()
+  77          //{
+  78          //  Lcd_WriteCmd(0x38); //16*2显示，5*7点阵，8位数据接口
+  79          //  Lcd_WriteCmd(0x0C); //显示器开，光标关闭，闪烁关闭  0000 1100
+  80          //  Lcd_WriteCmd(0x06); //文字不动，地址自动+1 0000 0110
+  81          //  Lcd_WriteCmd(0x01); //清屏
+  82          //}
+  83          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   ----    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

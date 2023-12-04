@@ -1,0 +1,4 @@
+".\Objects\main.obj",
+".\Objects\KEY.obj" 
+TO ".\Objects\temple" 
+PRINT(".\Listings\temple.m51") RAMSIZE(256) 

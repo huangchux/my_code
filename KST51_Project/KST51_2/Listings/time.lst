@@ -1,0 +1,48 @@
+C51 COMPILER V9.60.7.0   TIME                                                              10/24/2023 16:02:04 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TIME
+OBJECT MODULE PLACED IN .\Objects\time.obj
+COMPILER INVOKED BY: E:\keil1\C51\BIN\C51.EXE APP\time.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\APP;.\USER) DEBUG OBJECTEXTEN
+                    -D PRINT(.\Listings\time.lst) TABS(2) OBJECT(.\Objects\time.obj)
+
+line level    source
+
+   1          //#include "AllHead.h"
+   2          
+   3          //u8 T0RH = 0; //T0 重载值的高字节
+   4          //u8 T0RL = 0; //T0 重载值的低字节
+   5          
+   6          ///* 配置并启动T0，ms-T0定时时间 */
+   7          //void Time0_Init(u16 ms)
+   8          //{
+   9          //  u32 temp = 0; //临时变量
+  10          //  temp = 11059200 / 12;              //定时器计数频率
+  11          //  temp = (temp * ms) / 1000;         //计算所需的计数值
+  12          //  temp = 65536 - temp;               //计算定时器重载值
+  13          //  temp += 18;                        //补偿中断响应延时造成的误差
+  14          //  T0RH = (unsigned char)(temp >> 8); //定时器重载值拆分为高低字节
+  15          //  T0RL = (unsigned char)temp;
+  16          //  EA = 1;       //开总中断
+  17          //  TMOD &= 0xF0; //清零T0的控制位
+  18          //  TMOD |= 0x01; //配置T0为模式1
+  19          //  TH0 = T0RH;   //加载T0重载值
+  20          //  TL0 = T0RL;
+  21          //  ET0 = 1;      //使能T0中断
+  22          //  TR0 = 1;      //启动T0
+  23          //}
+  24          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   ----    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

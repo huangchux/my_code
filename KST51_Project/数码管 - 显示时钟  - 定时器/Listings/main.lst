@@ -1,0 +1,134 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              10/17/2023 17:27:03 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: E:\keil1\C51\BIN\C51.EXE user\src\main.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\user\inc;C:\Keil_v5\C51\
+                    -INC) DEBUG OBJECTEXTEND PRINT(.\Listings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <reg52.h>
+   2          #include "delay.h"
+   3          sbit ADDR0 = P1^0;
+   4          sbit ADDR1 = P1^1;
+   5          sbit ADDR2 = P1^2;
+   6          sbit ADDR3 = P1^3;
+   7          sbit ENLED = P1^4;
+   8          sbit P32 = P3^2;
+   9          unsigned char T0RH = 0;
+  10          unsigned char T0RL = 0;
+  11          
+  12          unsigned char LEDSChar[] = {0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90};
+  13          
+  14          unsigned char hour = 16;
+  15          unsigned char min = 45;
+  16          unsigned char sec = 30;
+  17          void show();
+  18          
+  19          void INT0_Init()
+  20          {
+  21   1        EA = 1;
+  22   1        EX0 = 1;
+  23   1        IE0 = 0;
+  24   1        IT0 = 0;
+  25   1        
+  26   1      }
+  27          
+  28          void Timer0Init(unsigned int ms)
+  29          {
+  30   1        unsigned long temp;
+  31   1        temp = 11059200 / 12;      //定时器计数器频率
+  32   1        temp = (temp * ms) / 1000; // 计算计数的值
+  33   1        temp += 12;                //补偿中断响应延时造成的误差
+  34   1        temp = 65536 - temp;       //计算定时器重载值
+  35   1        T0RH = (unsigned char)(temp >> 8); //初始值的高八位
+  36   1        T0RH = (unsigned char)temp;        //初始值的第八位
+  37   1        EA = 1;
+  38   1        TMOD &= 0xF0;              //对T0的工作模式参数清0
+  39   1        TMOD |= 0X01;
+  40   1        TH0 = T0RH;
+  41   1        TL0 = T0RL;
+  42   1        TR0 = 1;
+  43   1        ET0 = 1;
+  44   1      }
+  45          void main()
+  46          {
+  47   1        PX0 = 1;
+  48   1        PT0 = 0;
+  49   1        P32 = 1;
+  50   1        Timer0Init(1);
+  51   1        INT0_Init();
+  52   1        P2 = 0xF7;
+  53   1        while(1)
+  54   1        {
+C51 COMPILER V9.60.7.0   MAIN                                                              10/17/2023 17:27:03 PAGE 2   
+
+  55   2          show();
+  56   2        }
+  57   1      }
+  58          
+  59          
+  60          void show()
+  61          {
+  62   1        static unsigned char i=0;
+  63   1        ADDR3 = 1;
+  64   1        ENLED = 0;
+  65   1        P0=0XFF;
+  66   1        switch(i)
+  67   1        {
+  68   2          case 0:ADDR2=0;ADDR1=0;ADDR0=0;P0=LEDSChar[sec%10];i++;break;
+  69   2          case 1:ADDR2=0;ADDR1=0;ADDR0=1;P0=LEDSChar[sec/10];i++;break;
+  70   2          case 2:ADDR2=0;ADDR1=1;ADDR0=0;P0=LEDSChar[min%10];i++;break;
+  71   2          case 3:ADDR2=0;ADDR1=1;ADDR0=1;P0=LEDSChar[min/10];i++;break;
+  72   2          case 4:ADDR2=1;ADDR1=0;ADDR0=0;P0=LEDSChar[hour%10];i++;break;
+  73   2          case 5:ADDR2=1;ADDR1=0;ADDR0=1;P0=LEDSChar[hour/10];i=0;break;
+  74   2          default:break;
+  75   2        }
+  76   1      }
+  77          
+  78          void time0() interrupt 1
+  79          {
+  80   1        static unsigned int count = 0;
+  81   1        TF0 = 0;
+  82   1        TH0 = T0RH;
+  83   1        TL0 = T0RL;
+  84   1        count++;
+  85   1        if((count>1000) && (0 == IE0)) //不进行外部中断
+  86   1        {
+  87   2          count = 0;
+  88   2          sec++;
+  89   2          if(sec>59)
+  90   2          {
+  91   3            sec = 0;
+  92   3            min ++;
+  93   3            if(min>59)
+  94   3            {
+  95   4              min=0;
+  96   4              hour++;
+  97   4              if(hour>23)
+  98   4              {
+  99   5                hour = 0;
+ 100   5                min = 0;
+ 101   5                sec = 0;
+ 102   5              }
+ 103   4            }
+ 104   3          }
+ 105   2        }
+ 106   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    360    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     18       4
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+C51 COMPILER V9.60.7.0   MAIN                                                              10/17/2023 17:27:03 PAGE 3   
+
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,23 @@
+C51 COMPILER V9.60.7.0   TIME                                                              09/24/2023 14:21:07 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TIME
+OBJECT MODULE PLACED IN .\Objects\time.obj
+COMPILER INVOKED BY: E:\keil1\C51\BIN\C51.EXE APP\time\time.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\USER;.\APP\smg;.\APP\tim
+                    -e;.\APP\key) DEBUG OBJECTEXTEND PRINT(.\Listings\time.lst) TABS(2) OBJECT(.\Objects\time.obj)
+
+line level    source
+
+   1          #include "AllHead.h"
+*** ERROR C129 IN LINE 14 OF .\APP\key\key.h: missing ';' before 'key_sate'
+   2          void Time_Init()
+   3          {
+   4            EA = 1;
+   5            TMOD |= 0x01;
+   6            TH0 = 0xFC;
+   7            TL0 = 0x66;
+   8            ET0 = 1;
+   9            TR0 = 1;
+  10          }
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)

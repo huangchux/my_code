@@ -1,0 +1,63 @@
+C51 COMPILER V9.60.7.0   SMG                                                               10/30/2023 21:44:28 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE SMG
+OBJECT MODULE PLACED IN .\Objects\smg.obj
+COMPILER INVOKED BY: E:\keil1\C51\BIN\C51.EXE APP\smg.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\USER;.\APP) DEBUG OBJECTEXTEND
+                    - PRINT(.\Listings\smg.lst) TABS(2) OBJECT(.\Objects\smg.obj)
+
+line level    source
+
+   1          #include "AllHead.h"
+   2          
+   3          u8 gsmg[10] = {0xc0, 0xf9, 0xa4, 0xb0, 0x99, 0x92, 0x82, 0xf8, 0x80, 0x90}; //ÊýÂë¹Ü1-9
+   4          u8 SMG_BUFF[2] = {0xFF,0xFF}; //ÊýÂë¹Ü»º´æÇø£¬³õÖµ0xFF
+   5          u8 SMG_Flag = 0;
+   6          
+   7          extern void Delay1ms();
+   8          
+   9          void SMG_Scan()
+  10          {
+  11   1        static u8 i = 0;
+  12   1        
+  13   1        LED_SMG_PORT = 0xFF; //ÏûÓ°
+  14   1        switch(i)
+  15   1        {
+  16   2          case 0: ADDR2 = 0; ADDR1 = 0; ADDR0 = 0; i++; LED_SMG_PORT = SMG_BUFF[0];Delay1ms(); //ÕâÀï²»ÒªÓÃbreak,²
+             -»È»Ö´ÐÐÕâ¸öÓï¾ä¾Í»áÌøµ½ÊýÂë¹ÜÏÔÊ¾º¯ÊýÈ¥ÁË
+  17   2          case 1: ADDR2 = 0; ADDR1 = 0; ADDR0 = 1; i=0; LED_SMG_PORT = SMG_BUFF[1];Delay1ms();break;
+  18   2          default: break;
+  19   2        }
+  20   1      }
+  21          
+  22          void SMG_Dispaly()
+  23          {
+  24   1        static u8 sec = 0;
+  25   1        
+  26   1        if (SMG_Flag) //Èç¹û±êÖ¾Î»ÖÃ1
+  27   1        {
+  28   2          SMG_Flag = 0; //±êÖ¾Î»Çå0
+  29   2          sec++;
+  30   2          if(sec >= 100)
+  31   2          {
+  32   3            sec = 0;
+  33   3          }   
+  34   2        }
+  35   1      
+  36   1        SMG_BUFF[0] = gsmg[sec % 10]; //¸öÎ»
+  37   1        SMG_BUFF[1] = gsmg[sec / 10]; //Ê®Î»
+  38   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     87    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     15    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,17 @@
+{
+    "files.associations": {
+        "usart.h": "c",
+        "allhead.h": "c",
+        "dma.h": "c",
+        "pid.h": "c",
+        "adc.h": "c",
+        "infrared.h": "c",
+        "bsp_adc.h": "c",
+        "main.h": "c",
+        "tim.h": "c",
+        "callback.h": "c"
+    },
+    "C_Cpp.intelliSenseEngineFallback": "Disabled", //需要添加的
+    "C_Cpp.intelliSenseEngine": "default",
+    "C_Cpp.errorSquiggles": "disabled", //  需要添加的
+}

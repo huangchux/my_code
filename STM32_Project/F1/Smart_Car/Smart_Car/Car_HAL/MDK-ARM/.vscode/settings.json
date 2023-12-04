@@ -1,0 +1,30 @@
+{
+    "files.associations": {
+        "appheader.h": "c",
+        "gpio.h": "c",
+        "oled.h": "c",
+        "public.h": "c",
+        "motor.h": "c",
+        "led.h": "c",
+        "time.h": "c",
+        "fstream": "c",
+        "*.tcc": "c",
+        "limits": "c",
+        "streambuf": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "utility": "c",
+        "niming.h": "c",
+        "pid.h": "c",
+        "usart.h": "c",
+        "uart.h": "c",
+        "cjson.h": "c",
+        "adc2.h": "c",
+        "ir_sensor.h": "c",
+        "hc_sr04.h": "c",
+        "myi2c.h": "c",
+        "mpu6050_reg.h": "c",
+        "mpu6050.h": "c"
+    },
+    "commentTranslate.source": "Bing"
+}

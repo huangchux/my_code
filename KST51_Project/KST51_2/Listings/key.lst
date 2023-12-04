@@ -1,0 +1,114 @@
+C51 COMPILER V9.60.7.0   KEY                                                               10/24/2023 16:02:04 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE KEY
+OBJECT MODULE PLACED IN .\Objects\key.obj
+COMPILER INVOKED BY: E:\keil1\C51\BIN\C51.EXE APP\key.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\APP;.\USER) DEBUG OBJECTEXTEND
+                    - PRINT(.\Listings\key.lst) TABS(2) OBJECT(.\Objects\key.obj)
+
+line level    source
+
+   1          //#include "AllHead.h"
+   2          
+   3          //u8 code KeyCodeMap[4][4] = { //矩阵按键编号到标准键盘键码的映射表
+   4          // { '1', '2', '3', 0x26 }, //数字键 1、数字键 2、数字键 3、向上键
+   5          // { '4', '5', '6', 0x25 }, //数字键 4、数字键 5、数字键 6、向左键
+   6          // { '7', '8', '9', 0x28 }, //数字键 7、数字键 8、数字键 9、向下键
+   7          // { '0', 0x1B, 0x0D, 0x27 } //数字键 0、ESC 键、 回车键、 向右键
+   8          //};
+   9          //u8 pdata Key_State[4][4] = {{1, 1, 1, 1}, {1, 1, 1, 1}, {1, 1, 1, 1}, {1, 1, 1, 1}};//按键当前状态
+  10          //  
+  11          ///* 按键驱动函数，检测按键动作，调度相应动作函数，需在主循环中调用 */
+  12          //void Key_Driver()
+  13          //{
+  14          //  u8 i,j;
+  15          //  static u8 backup[4][4] = {{1, 1, 1, 1}, {1, 1, 1, 1}, {1, 1, 1, 1}, {1, 1, 1, 1}}; //按键值备份，保存前
+             -一次的值
+  16          //  for(i = 0; i < 4; i++) //循环扫描 4*4 的矩阵按键
+  17          //  {
+  18          //    for(j = 0; j < 4; j++)
+  19          //    {
+  20          //      if(backup[i][j] != Key_State[i][j]) //当前值与前次值不相等说明此时按键有动作
+  21          //      {
+  22          //        if(backup[i][j] != 0)  //前次值不等于0，则当前值等于0，按键按下
+  23          //        {
+  24          //          Key_Action(KeyCodeMap[i][j]); //调用按键动作函数
+  25          //        }
+  26          //        backup[i][j] = Key_State[i][j]; //更新前一次的备份值
+  27          //      } 
+  28          //    }
+  29          //  }
+  30          //}
+  31          
+  32          ///* 按键扫描函数，需在定时中断中调用 */
+  33          //void Key_Scan()
+  34          //{
+  35          //    u8 i = 0;
+  36          //    static u8 KeyOut = 0; //矩阵按键扫描输出索引
+  37          //    static u8 keybuf[4][4] = {{0xFF, 0xFF, 0xFF, 0xFF}, {0xFF, 0xFF, 0xFF, 0xFF},
+  38          //                              {0xFF, 0xFF, 0xFF, 0xFF}, {0xFF, 0xFF, 0xFF, 0xFF}
+  39          //    }; //矩阵按键扫描缓冲区
+  40          //    //将一行的 4 个按键值移入缓冲区
+  41          //    keybuf[KeyOut][0] = (keybuf[KeyOut][0] << 1) | KeyIn1;
+  42          //    keybuf[KeyOut][1] = (keybuf[KeyOut][1] << 1) | KeyIn2;
+  43          //    keybuf[KeyOut][2] = (keybuf[KeyOut][2] << 1) | KeyIn3;
+  44          //    keybuf[KeyOut][3] = (keybuf[KeyOut][3] << 1) | KeyIn4;
+  45          //    //消抖后更新按键状态
+  46          //    for (i = 0; i < 4; i++) //每行 4 个按键，所以循环 4 次
+  47          //    {
+  48          //        if (0x00 == (keybuf[KeyOut][i] & 0x0F))
+  49          //        {
+  50          //            //连续 4 次扫描值为 0，即 4*4ms 内都是按下状态时，可认为按键已稳定的按下
+  51          //            Key_State[KeyOut][i] = 0;
+  52          //        }
+  53          //        else if (0x0F == (keybuf[KeyOut][i] & 0x0F))
+C51 COMPILER V9.60.7.0   KEY                                                               10/24/2023 16:02:04 PAGE 2   
+
+  54          //        {
+  55          //            //连续 4 次扫描值为 1，即 4*4ms 内都是弹起状态时，可认为按键已稳定的弹起
+  56          //            Key_State[KeyOut][i] = 1;
+  57          //        }
+  58          //    }
+  59          //    //执行下一次的扫描输出
+  60          //    KeyOut++; //输出索引递增
+  61          //    if (KeyOut >= 4)
+  62          //    {
+  63          //        KeyOut = 0;
+  64          //    }
+  65          //    //  KeyOut = KeyOut & 0x03; //索引值加到 4 即归零
+  66          //    switch(KeyOut) //根据索引，释放当前输出引脚，拉低下次的输出引脚
+  67          //    {
+  68          //    case 0:
+  69          //        KeyOut4 = 1;
+  70          //        KeyOut1 = 0;
+  71          //        break;
+  72          //    case 1:
+  73          //        KeyOut1 = 1;
+  74          //        KeyOut2 = 0;
+  75          //        break;
+  76          //    case 2:
+  77          //        KeyOut2 = 1;
+  78          //        KeyOut3 = 0;
+  79          //        break;
+  80          //    case 3:
+  81          //        KeyOut3 = 1;
+  82          //        KeyOut4 = 0;
+  83          //        break;
+  84          //    default:
+  85          //        break;
+  86          //    }
+  87          //}
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   ----    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,70 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              09/21/2023 16:57:53 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: E:\keil1\C51\BIN\C51.EXE USER\main.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\APP\time;.\APP\smg;.\APP\LED
+                    -;.\APP) DEBUG OBJECTEXTEND PRINT(.\Listings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "AllHead.h"
+   2          u8 flag1 = 0; //标志位
+   3          u8 flag2 = 0; //标志位
+   4          u8 hour,min,sec; //时分秒
+   5          void main()
+   6          {
+   7   1        ENLED = 0;  //E1 E2低电平有效
+   8   1        ADDR3 = 1;  //G1(E3) 使能管脚高电平
+   9   1        Time0_Init(); //调用定时器初始化函数
+  10   1        while(1)
+  11   1        {
+  12   2          if(flag1 == 1) //判断1s定时标志
+  13   2          {
+  14   3            flag1 = 0;   //清除中断标志
+  15   3            smg_show();  //时钟计数显示函数
+  16   3          }
+  17   2          if(flag2 == 1)
+  18   2          {
+  19   3            flag2 = 0;
+  20   3            LED_Contral(1); //LED函数
+  21   3          }
+  22   2        }
+  23   1      }
+  24          
+  25          void time0() interrupt 1 //定时器0中断服务函数
+  26          {
+  27   1        static u16 count1 = 0;  //记录T0中断次数
+  28   1        static u16 count2 = 0;  //记录T0中断次数
+  29   1        TH0 = 0XFC; //重载初值
+  30   1        TL0 = 0x66;
+  31   1        count1++;    //中断计数+1
+  32   1        if(count1 == 1000) //中断1000次相当于1秒 (1000ms = 1s)
+  33   1        {
+  34   2          count1 = 0;   //溢出中断清0
+  35   2          flag1 = 1;    //设置中断标志位
+  36   2        }
+  37   1        count2++;
+  38   1        if(count2  == 1000)
+  39   1        {
+  40   2          count2 = 0;
+  41   2          flag2 = 1;
+  42   2        }   
+  43   1        smg_display(); //动态数码管显示函数
+  44   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    148    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      9    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+C51 COMPILER V9.60.7.0   MAIN                                                              09/21/2023 16:57:53 PAGE 2   
+
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

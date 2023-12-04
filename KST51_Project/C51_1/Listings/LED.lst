@@ -1,0 +1,82 @@
+C51 COMPILER V9.60.7.0   LED                                                               11/11/2023 13:00:53 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE LED
+OBJECT MODULE PLACED IN .\Objects\LED.obj
+COMPILER INVOKED BY: E:\keil1\C51\BIN\C51.EXE USER\LED.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\USER;.\USER;.\USER\iic;.\USER
+                    -\EEPROM;.\USER\time;.\USER\DS18B20;.\USER\DS1302;.\USER\ired) DEBUG OBJECTEXTEND PRINT(.\Listings\LED.lst) TABS(2) OBJEC
+                    -T(.\Objects\LED.obj)
+
+line level    source
+
+   1          #include "AllHead.h"
+   2          
+   3          ///*
+   4          //功能：控制LED1灯闪烁
+   5          //*/
+   6          
+   7          //void LED_flicker()
+   8          //{
+   9          //  LED1 = 0;   //LED1端口设置为低电平
+  10          //  delay_10us(50000); 
+  11          //  LED1 = 1;   //LED1端口设置为高电平
+  12          //  delay_10us(50000);
+  13          //  
+  14          //}
+  15          
+  16          ///*
+  17          //功能：LED流水灯
+  18          //*/
+  19          
+  20          //void LED_fall()
+  21          //{
+  22          //  u8 i = 0;
+  23          //  for(i = 0;i < 8;i++)
+  24          //  {
+  25          //    LED_PORT = ~(0x01 << i); //0000 0001 左移i位 按位取反变成 1111 1110 （点亮第一个灯）
+  26          //    delay_10us(50000);
+  27          //  }
+  28          //}
+  29          
+  30          /*
+  31          功能：用库函数写LED流水灯
+  32          _crol_函数（左移函数） ：参数一：用来控制位； 参数二：用来控制每次移动的位数
+  33          _cror_函数（右移函数） ：参数一：用来控制位； 参数二：用来控制每次移动的位数
+  34          */
+  35          
+  36          /*void LED_ku_fall()
+  37          {
+  38            u8 i = 0;
+  39            LED_PORT = ~0x01;  //先点亮第一个LED灯（0000 0001 按位取反 --> 1111 1110） or 0xfe
+  40            //delay_10us(20000);
+  41            Delay1ms(500);
+  42            for(i = 0;i < 7;i++)               //循环七次，因为灯一开始就点亮了
+  43            {
+  44              LED_PORT = _crol_(LED_PORT,1);   //LED从左边开始每次移动一位
+  45              //delay_10us(20000);               //（1111 1110 向左移动一位 --> 1111 1101）
+  46              Delay1ms(500);
+  47            }
+  48            for(i = 0;i < 7;i++)               //循环七次，因为灯一开始就点亮了
+  49            {
+  50              LED_PORT = _cror_(LED_PORT,1);   //LED从右边开始每次移动一位
+  51              //delay_10us(20000);               //（0111 1111 向右移动一位 --> 1011 1111）
+  52              Delay1ms(500);
+  53            }
+C51 COMPILER V9.60.7.0   LED                                                               11/11/2023 13:00:53 PAGE 2   
+
+  54          }*/
+  55          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   ----    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

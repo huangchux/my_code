@@ -1,0 +1,77 @@
+C51 COMPILER V9.60.7.0   MOTOR                                                             09/29/2023 16:35:37 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MOTOR
+OBJECT MODULE PLACED IN .\Objects\Motor.obj
+COMPILER INVOKED BY: E:\keil1\C51\BIN\C51.EXE APP\Motor.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\APP;.\USER) DEBUG OBJECTEXTE
+                    -ND PRINT(.\Listings\Motor.lst) TABS(2) OBJECT(.\Objects\Motor.obj)
+
+line level    source
+
+   1          //#include "AllHead.h"
+   2          
+   3          //signed long beats = 0; //╣Г╩Зв╙╤╞╫зедвэйЩ
+   4          
+   5          ///* ╡╫╫Ь╣Г╩ЗфТ╤╞╨╞йЩё╛angle-пХв╙╧Щ╣д╫г╤х */
+   6          //void StartMotor(signed long angle) //рРн╙иФ╪╟уЩв╙╥╢в╙ё╛╥Ш╨еспуЩ╦╨ё╛кЫртр╙сцsigned 
+   7          //{
+   8          //  EA = 0; //тз╪фкЦг╟╧ь╠ужп╤оё╛мЙЁи╨Сты╢Р©╙ё╛рт╠эцБжп╤о╢Р╤о╪фкЦ╧ЩЁл╤ЬтЛЁи╢МнС
+   9          //  beats = (angle * 4076) / 360; //й╣╡Бн╙ 4076 едв╙╤╞р╩х╕
+  10          //  EA = 1;
+  11          //}
+  12          
+  13          ///* ╡╫╫Ь╣Г╩Змёж╧╨╞йЩ */
+  14          //void StopMotor()
+  15          //{
+  16          //  EA = 0;
+  17          //  beats = 0;
+  18          //  EA = 1;
+  19          //}
+  20          
+  21          ///* ╣Г╩Зв╙╤╞©ьжф╨╞йЩ */
+  22          //void TurnMotor()
+  23          //{
+  24          //  u8 temp;   //аый╠╠Да©
+  25          //  static u8 index = 0; //╫зедйДЁЖкВрЩ
+  26          //  u8 code BeatCode[8] = {0x0E, 0x0C, 0x0D, 0x09, 0x0B, 0x03, 0x07, 0x06}; //╡╫╫Ь╣Г╩З╫зед╤тс╕╣д IO ©ьжф╢Зб
+             -К
+  27          //  if(beats != 0) //╫зедйЩ╡╩н╙ 0 тР╡ЗиЗр╩╦ЖгЩ╤╞╫зед
+  28          //  {
+  29          //    if(beats > 0) //╫зедйЩ╢Ссз 0 й╠уЩв╙
+  30          //    {
+  31          //      index++;        //уЩв╙й╠╫зедйДЁЖкВрЩ╣щтЖ
+  32          //      index &= 0x07;  //сц&╡ывВй╣ож╣╫ 8 ╧ИаЦ
+  33          //      beats--;        //уЩв╙й╠╫зед╪фйЩ╣щ╪У
+  34          //    }
+  35          //    else              //╫зедйЩп║сз 0 й╠╥╢в╙
+  36          //    {
+  37          //      index--;        //╥╢в╙й╠╫зедйДЁЖкВрЩ╣щ╪У
+  38          //      index &= 0x07;  //сц&╡ывВм╛яЫ©иртй╣ож╣╫-1 й╠╧И 7
+  39          //      beats++;        //╥╢в╙й╠╫зед╪фйЩ╣щтЖ
+  40          //    }
+  41          //    temp = MOTOR_PORT;       //сц temp ╟я╡╫╫Ь╣Г╩З╤к©з╣╠г╟ж╣тщ╢Ф
+  42          //    temp &= 0xF0;            //сц&╡ывВгЕаЦ╣м 4 н╩
+  43          //    temp |= BeatCode[index]; //сц|╡ывВ╟я╫зед╢ЗбКп╢╣╫╣м 4 н╩
+  44          //    MOTOR_PORT = temp;       //╟я╣м 4 н╩╣д╫зед╢ЗбК╨м╦ъ 4 н╩╣дт╜ж╣км╩ь╡╫╫Ь╣Г╩З╤к©з
+  45          //  }
+  46          //  else  //╫зедйЩн╙ 0 тР╧ь╠у╣Г╩ЗкЫсп╣доЮ
+  47          //  {
+  48          //    MOTOR_PORT |= 0x0F;
+  49          //  }
+  50          //}
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+C51 COMPILER V9.60.7.0   MOTOR                                                             09/29/2023 16:35:37 PAGE 2   
+
+   CODE SIZE        =   ----    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,76 @@
+*** Using Compiler 'V5.06 update 5 (build 528)', folder: 'D:\51DPJ\KEILC51\ARM\ARMCC\Bin'
+Build target 'Car_HAL'
+compiling MPU6050.c...
+..\MPU6050\MyI2C.h(9): error:  #20: identifier "uint8_t" is undefined
+  void MyI2C_SendByte(uint8_t Byte);
+..\MPU6050\MyI2C.h(10): error:  #20: identifier "uint8_t" is undefined
+  uint8_t MyI2C_ReceiveByte(void);
+..\MPU6050\MyI2C.h(11): error:  #20: identifier "uint8_t" is undefined
+  void MyI2C_SendAck(uint8_t AckBit);
+..\MPU6050\MyI2C.h(12): error:  #20: identifier "uint8_t" is undefined
+  uint8_t MyI2C_ReceiveAck(void);
+..\MPU6050\MPU6050.c(7): error:  #20: identifier "uint8_t" is undefined
+  void MPU6050_WriteReg(uint8_t RegAddress, uint8_t Data)
+..\MPU6050\MPU6050.c(7): error:  #20: identifier "uint8_t" is undefined
+  void MPU6050_WriteReg(uint8_t RegAddress, uint8_t Data)
+..\MPU6050\MPU6050.c(19): error:  #20: identifier "uint8_t" is undefined
+  uint8_t MPU6050_ReadReg(uint8_t RegAddress)
+..\MPU6050\MPU6050.c(19): error:  #20: identifier "uint8_t" is undefined
+  uint8_t MPU6050_ReadReg(uint8_t RegAddress)
+..\MPU6050\MPU6050.c(21): error:  #20: identifier "uint8_t" is undefined
+  	uint8_t Data;
+..\MPU6050\MPU6050.c(50): error:  #20: identifier "uint8_t" is undefined
+  uint8_t MPU6050_GetID(void)
+..\MPU6050\MPU6050.c(55): error:  #20: identifier "int16_t" is undefined
+  void MPU6050_GetData(int16_t *AccX, int16_t *AccY, int16_t *AccZ, 
+..\MPU6050\MPU6050.c(55): error:  #20: identifier "int16_t" is undefined
+  void MPU6050_GetData(int16_t *AccX, int16_t *AccY, int16_t *AccZ, 
+..\MPU6050\MPU6050.c(55): error:  #20: identifier "int16_t" is undefined
+  void MPU6050_GetData(int16_t *AccX, int16_t *AccY, int16_t *AccZ, 
+..\MPU6050\MPU6050.c(56): error:  #20: identifier "int16_t" is undefined
+  						int16_t *GyroX, int16_t *GyroY, int16_t *GyroZ)
+..\MPU6050\MPU6050.c(56): error:  #20: identifier "int16_t" is undefined
+  						int16_t *GyroX, int16_t *GyroY, int16_t *GyroZ)
+..\MPU6050\MPU6050.c(56): error:  #20: identifier "int16_t" is undefined
+  						int16_t *GyroX, int16_t *GyroY, int16_t *GyroZ)
+..\MPU6050\MPU6050.c(58): error:  #20: identifier "uint8_t" is undefined
+  	uint8_t DataH, DataL;
+..\MPU6050\MPU6050.c: 0 warnings, 17 errors
+compiling MyI2C.c...
+..\MPU6050\MyI2C.c(5): warning:  #223-D: function "GPIO_WriteBit" declared implicitly
+  	GPIO_WriteBit(GPIOB, GPIO_Pin_10, (BitAction)BitValue);
+..\MPU6050\MyI2C.c(5): error:  #20: identifier "GPIO_Pin_10" is undefined
+  	GPIO_WriteBit(
+PIOB, GPIO_Pin_10, (BitAction)BitValue);
+..\MPU6050\MyI2C.c(5): error:  #20: identifier "BitAction" is undefined
+  	GPIO_WriteBit(
+PIOB, GPIO_Pin_10, (BitAction)BitValue);
+..\MPU6050\MyI2C.c(5): error:  #18: expected a ")"
+  	GPIO_WriteBit(
+PIOB, GPIO_Pin_10, (BitAction)BitValue);
+..\MPU6050\MyI2C.c(6): warning:  #223-D: function "Delay_us" declared implicitly
+  	Delay_us(10);
+..\MPU6050\MyI2C.c(11): warning:  #223-D: function "GPIO_WriteBit" declared implicitly
+  	GPIO_WriteBit(GPIOB, GPIO_Pin_11, (BitAction)BitValue);
+..\MPU6050\MyI2C.c(11): error:  #20: identifier "GPIO_Pin_11" is undefined
+  	GPIO_WriteBit(
+PIOB, GPIO_Pin_11, (BitAction)BitValue);
+..\MPU6050\MyI2C.c(11): error:  #20: identifier "BitAction" is undefined
+  	GPIO_WriteBit(
+PIOB, GPIO_Pin_11, (BitAction)BitValue);
+..\MPU6050\MyI2C.c(11): error:  #18: expected a ")"
+  	GPIO_WriteBit(
+PIOB, GPIO_Pin_11, (BitAction)BitValue);
+..\MPU6050\MyI2C.c(12): warning:  #223-D: function "Delay_us" declared implicitly
+  	Delay_us(10);
+..\MPU6050\MyI2C.c(18): warning:  #223-D: function "GPIO_ReadInputDataBit" declared implicitly
+  	BitValue = GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_11);
+..\MPU6050\MyI2C.c(18): error:  #20: identifier "GPIO_Pin_11" is undefined
+  	BitValue = GPIO_ReadInputDataBit(
+PIOB, GPIO_Pin_11);
+..\MPU6050\MyI2C.c(19): warning:  #223-D: function "Delay_us" declared implicitly
+  	Delay_us(10);
+..\MPU6050\MyI2C.c: 6 warnings, 7 errors
+"Car_HAL\Car_HAL.axf" - 24 Error(s), 6 Warning(s).
+Target not created.
+Build Time Elapsed:  00:00:01

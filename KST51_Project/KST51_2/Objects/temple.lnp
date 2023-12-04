@@ -1,0 +1,14 @@
+".\Objects\main.obj",
+".\Objects\key.obj",
+".\Objects\time.obj",
+".\Objects\smg.obj",
+".\Objects\Lcd1602.obj",
+".\Objects\UART.obj",
+".\Objects\I2C.obj",
+".\Objects\EEPROM.obj",
+".\Objects\DS1302.obj",
+".\Objects\Delay.obj",
+".\Objects\ired.obj",
+".\Objects\DS18B20.obj" 
+TO ".\Objects\temple" 
+PRINT(".\Listings\temple.m51") RAMSIZE(256) 

@@ -1,0 +1,6 @@
+".\Objects\main.obj",
+".\Objects\Key.obj",
+".\Objects\SMG.obj",
+".\Objects\Time.obj" 
+TO ".\Objects\KST51_1" 
+PRINT(".\Listings\KST51_1.m51") RAMSIZE(256) 

@@ -1,0 +1,1 @@
+"user\src\main.c" OPTIMIZE (8,SPEED) BROWSE INCDIR(.\user\inc;C:\Keil_v5\C51\INC) DEBUG OBJECTEXTEND PRINT(.\Listings\main.lst) TABS (2) OBJECT(.\Objects\main.obj)

@@ -1,0 +1,290 @@
+<html>
+<body>
+<pre>
+<h1>�Vision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ��Vision V5.38.0.0
+Copyright (C) 2022 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: ww www, www, LIC=9WSKC-74E2F-CXXU6-DTGAZ-PA1NV-DND1G
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.37.0.0
+Toolchain Path:  E:\keil1\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 7 (build 960)
+Assembler:       Armasm.exe V5.06 update 7 (build 960)
+Linker/Locator:  ArmLink.exe V5.06 update 7 (build 960)
+Library Manager: ArmAr.exe V5.06 update 7 (build 960)
+Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
+CPU DLL:         SARMCM3.DLL V5.37.0.0
+Dialog DLL:      DCM.DLL V1.17.5.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.9.0
+Dialog DLL:      TCM.DLL V1.56.1.0
+ 
+<h2>Project:</h2>
+E:\Smart_Car\Smart_Car\Car_HAL\MDK-ARM\Car_HAL.uvprojx
+Project File Date:  11/11/2023
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'E:\keil1\ARM\ARMCC\Bin'
+Build target 'Car_HAL'
+assembling startup_stm32f103xb.s...
+compiling stm32f1xx_hal_gpio_ex.c...
+compiling stm32f1xx_hal_adc_ex.c...
+compiling stm32f1xx_hal_cortex.c...
+compiling stm32f1xx_hal_pwr.c...
+compiling stm32f1xx_hal_dma.c...
+compiling stm32f1xx_hal_flash_ex.c...
+compiling stm32f1xx_hal_exti.c...
+compiling stm32f1xx_hal.c...
+compiling stm32f1xx_hal_flash.c...
+compiling stm32f1xx_hal_rcc_ex.c...
+compiling stm32f1xx_hal_tim_ex.c...
+compiling stm32f1xx_hal_gpio.c...
+compiling stm32f1xx_hal_adc.c...
+compiling system_stm32f1xx.c...
+compiling stm32f1xx_hal_rcc.c...
+compiling adc.c...
+compiling stm32f1xx_hal_uart.c...
+compiling gpio.c...
+compiling main.c...
+compiling tim.c...
+compiling cJSON.c...
+compiling stm32f1xx_it.c...
+compiling stm32f1xx_hal_tim.c...
+compiling usart.c...
+compiling LED.c...
+compiling MyInit.c...
+compiling stm32f1xx_hal_msp.c...
+compiling CallBack.c...
+compiling niming.c...
+compiling Public.c...
+compiling Motor.c...
+compiling System.c...
+compiling Time.c...
+compiling myIIC.c...
+..\App\myIIC.c(10): error:  #20: identifier "IIC_Data_t" is undefined
+  static void IIC_Registered(IIC_Data_t *dev, GPIO_TypeDef *SCL_GPIOx, uint16_t SCL_GPIO_Pin,  GPIO_TypeDef *SDA_GPIOx, uint16_t SDA_GPIO_Pin);
+..\App\myIIC.c(11): error:  #20: identifier "IIC_Data_t" is undefined
+  static void IIC_Init(IIC_Data_t * dev);
+..\App\myIIC.c(12): error:  #20: identifier "IIC_Data_t" is undefined
+  static void IIC_Start(IIC_Data_t *dev);
+..\App\myIIC.c(12): error:  #147-D: declaration is incompatible with "void IIC_Start(void)"  (declared at line 71 of "../OLED/oled.h")
+  static void IIC_Start(IIC_Data_t *dev);
+..\App\myIIC.c(13): error:  #20: identifier "IIC_Data_t" is undefined
+  static void IIC_Stop(IIC_Data_t *dev);
+..\App\myIIC.c(13): error:  #147-D: declaration is incompatible with "void IIC_Stop(void)"  (declared at line 72 of "../OLED/oled.h")
+  static void IIC_Stop(IIC_Data_t *dev);
+..\App\myIIC.c(14): error:  #20: identifier "ACK_Value_t" is undefined
+  static ACK_Value_t IIC_Write_Byte(IIC_Data_t *dev, uint8_t WR_Byte);
+..\App\myIIC.c(14): error:  #20: identifier "IIC_Data_t" is undefined
+  static ACK_Value_t IIC_Write_Byte(IIC_Data_t *dev, uint8_t WR_Byte);
+..\App\myIIC.c(15): error:  #20: identifier "IIC_Data_t" is undefined
+  static uint8_t IIC_Read_Byte(IIC_Data_t *dev, ACK_Value_t ACK_Value);
+..\App\myIIC.c(15): error:  #20: identifier "ACK_Value_t" is undefined
+  static uint8_t IIC_Read_Byte(IIC_Data_t *dev, ACK_Value_t ACK_Value);
+..\App\myIIC.c(17): error:  #20: identifier "IIC_Data_t" is undefined
+  static uint8_t IIC_Write_Buffer(IIC_Data_t *dev, uint8_t addr, uint8_t reg, uint32_t len, uint8_t *data);
+..\App\myIIC.c(18): error:  #20: identifier "IIC_Data_t" is undefined
+  static uint8_t IIC_Read_Buffer(IIC_Data_t *dev, uint8_t addr, uint8_t reg, uint32_t len, uint8_t *buf);
+..\App\myIIC.c(21): error:  #20: identifier "IIC_Soft_t" is undefined
+  IIC_Soft_t IIC_Soft = 
+..\App\myIIC.c(38): error:  #20: identifier "IIC_Data_t" is undefined
+  static void IIC_Registered(IIC_Data_t *dev, GPIO_TypeDef *SCL_GPIOx, uint16_t SCL_GPIO_Pin,  GPIO_TypeDef *SDA_GPIOx, uint16_t SDA_GPIO_Pin)
+..\App\myIIC.c(54): error:  #20: identifier "IIC_Data_t" is undefined
+  static void IIC_Init(IIC_Data_t *dev)
+..\App\myIIC.c(57): warning:  #223-D: function "SET_SCL" declared implicitly
+  	SET_SCL(dev->SCL_GPIOx, dev->SCL_GPIO_Pin);
+..\App\myIIC.c(58): warning:  #223-D: function "SET_SDA" declared implicitly
+  	SET_SDA(dev->SDA_GPIOx, dev->SDA_GPIO_Pin);
+..\App\myIIC.c(67): error:  #20: identifier "IIC_Data_t" is undefined
+  static void IIC_Start(IIC_Data_t *dev)
+..\App\myIIC.c(70): warning:  #223-D: function "SET_SDA" declared implicitly
+  	SET_SDA(dev->SDA_GPIOx, dev->SDA_GPIO_Pin);
+..\App\myIIC.c(71): warning:  #223-D: function "SET_SCL" declared implicitly
+  	SET_SCL(dev->SCL_GPIOx, dev->SCL_GPIO_Pin);
+..\App\myIIC.c(72): error:  #136: struct "<unnamed>"  has no field "Public_Delay_us"
+  	Public.Public_Delay_us(1);
+..\App\myIIC.c(74): warning:  #223-D: function "CLR_SDA" declared implicitly
+  	CLR_SDA(dev->SDA_GPIOx, dev->SDA_GPIO_Pin);
+..\App\myIIC.c(75): error:  #136: struct "<unnamed>"  has no field "Public_Delay_us"
+  	Public.Public_Delay_us(10);
+..\App\myIIC.c(77): warning:  #223-D: function "CLR_SCL" declared implicitly
+  	CLR_SCL(dev->SCL_GPIOx, dev->SCL_GPIO_Pin);
+..\App\myIIC.c(78): error:  #136: struct "<unnamed>"  has no field "Public_Delay_us"
+  	Public.Public_Delay_us(1);
+..\App\myIIC.c(87): error:  #20: identifier "IIC_Data_t" is undefined
+  static void IIC_Stop(IIC_Data_t *dev)
+..\App\myIIC.c(90): warning:  #223-D: function "CLR_SDA" declared implicitly
+  	CLR_SDA(dev->SDA_GPIOx, dev->SDA_GPIO_Pin);
+..\App\myIIC.c(91): warning:  #223-D: function "SET_SCL" declared implicitly
+  	SET_SCL(dev->SCL_GPIOx, dev->SCL_GPIO_Pin);
+..\App\myIIC.c(92): error:  #136: struct "<unnamed>"  has no field "Public_Delay_us"
+  	Public.Public_Delay_us(1);
+..\App\myIIC.c(94): error:  #136: struct "<unnamed>"  has no field "Public_Delay_us"
+  	Public.Public_Delay_us(10);
+..\App\myIIC.c(95): warning:  #223-D: function "SET_SDA" declared implicitly
+  	SET_SDA(dev->SDA_GPIOx, dev->SDA_GPIO_Pin);
+..\App\myIIC.c(104): error:  #20: identifier "ACK_Value_t" is undefined
+  static ACK_Value_t IIC_Write_Byte(IIC_Data_t *dev, uint8_t WR_Byte)
+..\App\myIIC.c(104): error:  #20: identifier "IIC_Data_t" is undefined
+  static ACK_Value_t IIC_Write_Byte(IIC_Data_t *dev, uint8_t WR_Byte)
+..\App\myIIC.c(107): error:  #20: identifier "ACK_Value_t" is undefined
+  	ACK_Value_t  ACK_Rspond;
+..\App\myIIC.c(114): warning:  #223-D: function "CLR_SCL" declared implicitly
+  		CLR_SCL(dev->SCL_GPIOx, dev->SCL_GPIO_Pin);
+..\App\myIIC.c(115): error:  #136: struct "<unnamed>"  has no field "Public_Delay_us"
+  		Public.Public_Delay_us(1);
+..\App\myIIC.c(118): warning:  #223-D: function "SET_SDA" declared implicitly
+  			SET_SDA(dev->SDA_GPIOx, dev->SDA_GPIO_Pin);
+..\App\myIIC.c(122): warning:  #223-D: function "CLR_SDA" declared implicitly
+  			CLR_SDA(dev->SDA_GPIOx, dev->SDA_GPIO_Pin);
+..\App\myIIC.c(124): error:  #136: struct "<unnamed>"  has no field "Public_Delay_us"
+  		Public.Public_Delay_us(1);
+..\App\myIIC.c(126): warning:  #223-D: function "SET_SCL" declared implicitly
+  		SET_SCL(dev->SCL_GPIOx, dev->SCL_GPIO_Pin);
+..\App\myIIC.c(127): error:  #136: struct "<unnamed>"  has no field "Public_Delay_us"
+  		Public.Public_Delay_us(10);
+..\App\myIIC.c(133): warning:  #223-D: function "CLR_SCL" declared implicitly
+  	CLR_SCL(dev->SCL_GPIOx, dev->SCL_GPIO_Pin);
+..\App\myIIC.c(135): warning:  #223-D: function "SET_SDA" declared implicitly
+  	SET_SDA(dev->SDA_GPIOx, dev->SDA_GPIO_Pin);
+..\App\myIIC.c(136): error:  #136: struct "<unnamed>"  has no field "Public_Delay_us"
+  	Public.Public_Delay_us(1);
+..\App\myIIC.c(138): warning:  #223-D: function "SET_SCL" declared implicitly
+  	SET_SCL(dev->SCL_GPIOx, dev->SCL_GPIO_Pin);
+..\App\myIIC.c(139): error:  #136: struct "<unnamed>"  has no field "Public_Delay_us"
+  	Public.Public_Delay_us(10);
+..\App\myIIC.c: 16 warnings, 30 errors
+compiling myMPU6050.c...
+..\App\myMPU6050.c(27): error:  #20: identifier "IIC_Data_t" is undefined
+  IIC_Data_t MPU6050_IIC;
+..\App\myMPU6050.c(29): error:  #20: identifier "MPU6050_st" is undefined
+  MPU6050_st myMPU6050 = 
+..\App\myMPU6050.c(54): error:  #20: identifier "IIC_Soft" is undefined
+      IIC_Soft.IIC_Registered(&MPU6050_IIC, MPU6050_SCL_GPIO_Port, MPU6050_SCL_Pin, MPU6050_SDA_GPIO_Port, MPU6050_SDA_Pin);
+..\App\myMPU6050.c(54): error:  #20: identifier "MPU6050_SCL_GPIO_Port" is undefined
+      IIC_Soft.IIC_Registered(&MPU6050_IIC, MPU6050_SCL_GPIO_Port, MPU6050_SCL_Pin, MPU6050_SDA_GPIO_Port, MPU6050_SDA_Pin);
+..\App\myMPU6050.c(54): error:  #20: identifier "MPU6050_SCL_Pin" is undefined
+      IIC_Soft.IIC_Registered(&MPU6050_IIC, MPU6050_SCL_GPIO_Port, MPU6050_SCL_Pin, MPU6050_SDA_GPIO_Port, MPU6050_SDA_Pin);
+..\App\myMPU6050.c(54): error:  #20: identifier "MPU6050_SDA_GPIO_Port" is undefined
+      IIC_Soft.IIC_Registered(&MPU6050_IIC, MPU6050_SCL_GPIO_Port, MPU6050_SCL_Pin, MPU6050_SDA_GPIO_Port, MPU6050_SDA_Pin);
+..\App\myMPU6050.c(54): error:  #20: identifier "MPU6050_SDA_Pin" is undefined
+      IIC_Soft.IIC_Registered(&MPU6050_IIC, MPU6050_SCL_GPIO_Port, MPU6050_SCL_Pin, MPU6050_SDA_GPIO_Port, MPU6050_SDA_Pin);
+..\App\myMPU6050.c(55): error:  #20: identifier "MPU_PWR_MGMT1_REG" is undefined
+      MPU_Write_Byte(MPU_PWR_MGMT1_REG, 0X80);	//��λMPU6050
+..\App\myMPU6050.c(56): error:  #136: struct "<unnamed>"  has no field "Public_Delay_ms"
+      Public.Public_Delay_ms(100);
+..\App\myMPU6050.c(61): error:  #20: identifier "MPU_INT_EN_REG" is undefined
+      MPU_Write_Byte(MPU_INT_EN_REG, 0X00);	//�ر������ж�
+..\App\myMPU6050.c(62): error:  #20: identifier "MPU_USER_CTRL_REG" is undefined
+      MPU_Write_Byte(MPU_USER_CTRL_REG, 0X00);	//I2C��ģʽ�ر�
+..\App\myMPU6050.c(63): error:  #20: identifier "MPU_FIFO_EN_REG" is undefined
+      MPU_Write_Byte(MPU_FIFO_EN_REG, 0X00);	//�ر�FIFO
+..\App\myMPU6050.c(64): error:  #20: identifier "MPU_INTBP_CFG_REG" is undefined
+      MPU_Write_Byte(MPU_INTBP_CFG_REG, 0X80);	//INT���ŵ͵�ƽ��Ч
+..\App\myMPU6050.c(65): error:  #20: identifier "MPU_DEVICE_ID_REG" is undefined
+      res = MPU_Read_Byte(MPU_DEVICE_ID_REG);
+..\App\myMPU6050.c(66): error:  #20: identifier "MPU_ADDR" is undefined
+      if(res == MPU_ADDR) //����ID��ȷ
+..\App\myMPU6050.c(69): error:  #20: identifier "MPU_PWR_MGMT2_REG" is undefined
+          MPU_Write_Byte(MPU_PWR_MGMT2_REG, 0X00);	//���ٶ��������Ƕ�����
+..\App\myMPU6050.c(84): error:  #20: identifier "MPU_GYRO_CFG_REG" is undefined
+      return MPU_Write_Byte(MPU_GYRO_CFG_REG, fsr << 3); //���������������̷�Χ
+..\App\myMPU6050.c(95): error:  #20: identifier "MPU_ACCEL_CFG_REG" is undefined
+      return MPU_Write_Byte(MPU_ACCEL_CFG_REG, fsr << 3); //���ü��ٶȴ����������̷�Χ
+..\App\myMPU6050.c(114): error:  #20: identifier "MPU_CFG_REG" is undefined
+      return MPU_Write_Byte(MPU_CFG_REG, data); //�������ֵ�ͨ�˲���
+..\App\myMPU6050.c(129): error:  #20: identifier "MPU_SAMPLE_RATE_REG" is undefined
+      data = MPU_Write_Byte(MPU_SAMPLE_RATE_REG, data);	//�������ֵ�ͨ�˲���
+..\App\myMPU6050.c(144): error:  #20: identifier "MPU_ADDR" is undefined
+      MPU_Read_Len(MPU_ADDR, MPU_TEMP_OUTH_REG, 2, buf);
+..\App\myMPU6050.c(144): error:  #20: identifier "MPU_TEMP_OUTH_REG" is undefined
+      MPU_Read_Len(MPU_ADDR, MPU_TEMP_OUTH_REG, 2, buf);
+..\App\myMPU6050.c(159): error:  #20: identifier "MPU_ADDR" is undefined
+      res = MPU_Read_Len(MPU_ADDR, MPU_GYRO_XOUTH_REG, 6, buf);
+..\App\myMPU6050.c(159): error:  #20: identifier "MPU_GYRO_XOUTH_REG" is undefined
+      res = MPU_Read_Len(MPU_ADDR, MPU_GYRO_XOUTH_REG, 6, buf);
+..\App\myMPU6050.c(178): error:  #20: identifier "MPU_ADDR" is undefined
+      res = MPU_Read_Len(MPU_ADDR, MPU_ACCEL_XOUTH_REG, 6, buf);
+..\App\myMPU6050.c(178): error:  #20: identifier "MPU_ACCEL_XOUTH_REG" is undefined
+      res = MPU_Read_Len(MPU_ADDR, MPU_ACCEL_XOUTH_REG, 6, buf);
+..\App\myMPU6050.c(201): error:  #20: identifier "IIC_Soft" is undefined
+      IIC_Soft.IIC_Start(&MPU6050_IIC);
+..\App\myMPU6050.c(221): error:  #20: identifier "IIC_Soft" is undefined
+      IIC_Soft.IIC_Start(&MPU6050_IIC);
+..\App\myMPU6050.c(230): error:  #20: identifier "NACK" is undefined
+              *buf = IIC_Soft.IIC_Read_Byte(&MPU6050_IIC, NACK); // ������,����nACK
+..\App\myMPU6050.c(232): error:  #20: identifier "ACK" is undefined
+              *buf = IIC_Soft.IIC_Read_Byte(&MPU6050_IIC, ACK); // ������,����ACK
+..\App\myMPU6050.c: 0 warnings, 30 errors
+compiling inv_mpu.c...
+..\MPU6050\eMPL\inv_mpu.c(771): error:  #136: struct "<unnamed>"  has no field "Public_Delay_ms"
+      delay_ms(100);
+..\MPU6050\eMPL\inv_mpu.c(1117): error:  #136: struct "<unnamed>"  has no field "Public_Delay_ms"
+          delay_ms(50);
+..\MPU6050\eMPL\inv_mpu.c(1142): error:  #136: struct "<unnamed>"  has no field "Public_Delay_ms"
+          delay_ms(50);
+..\MPU6050\eMPL\inv_mpu.c(1666): error:  #136: struct "<unnamed>"  has no field "Public_Delay_ms"
+      delay_ms(50);
+..\MPU6050\eMPL\inv_mpu.c(1836): error:  #136: struct "<unnamed>"  has no field "Public_Delay_ms"
+          delay_ms(3);
+..\MPU6050\eMPL\inv_mpu.c(1854): error:  #136: struct "<unnamed>"  has no field "Public_Delay_ms"
+          delay_ms(3);
+..\MPU6050\eMPL\inv_mpu.c(2045): error:  #136: struct "<unnamed>"  has no field "Public_Delay_ms"
+      delay_ms(200);
+..\MPU6050\eMPL\inv_mpu.c(2060): error:  #136: struct "<unnamed>"  has no field "Public_Delay_ms"
+      delay_ms(15);
+..\MPU6050\eMPL\inv_mpu.c(2081): error:  #136: struct "<unnamed>"  has no field "Public_Delay_ms"
+          delay_ms(200);
+..\MPU6050\eMPL\inv_mpu.c(2091): error:  #136: struct "<unnamed>"  has no field "Public_Delay_ms"
+      delay_ms(test.wait_ms);
+..\MPU6050\eMPL\inv_mpu.c(2736): error:  #136: struct "<unnamed>"  has no field "Public_Delay_ms"
+          delay_ms(5);
+..\MPU6050\eMPL\inv_mpu.c(2959): error:  #20: identifier "MPU6050_SCL_GPIO_Port" is undefined
+  	IIC_Soft.IIC_Registered(&MPU6050_IIC, MPU6050_SCL_GPIO_Port, MPU6050_SCL_Pin, MPU6050_SDA_GPIO_Port, MPU6050_SDA_Pin);
+..\MPU6050\eMPL\inv_mpu.c(2959): error:  #20: identifier "MPU6050_SCL_Pin" is undefined
+  	IIC_Soft.IIC_Registered(&MPU6050_IIC, MPU6050_SCL_GPIO_Port, MPU6050_SCL_Pin, MPU6050_SDA_GPIO_Port, MPU6050_SDA_Pin);
+..\MPU6050\eMPL\inv_mpu.c(2959): error:  #20: identifier "MPU6050_SDA_GPIO_Port" is undefined
+  	IIC_Soft.IIC_Registered(&MPU6050_IIC, MPU6050_SCL_GPIO_Port, MPU6050_SCL_Pin, MPU6050_SDA_GPIO_Port, MPU6050_SDA_Pin);
+..\MPU6050\eMPL\inv_mpu.c(2959): error:  #20: identifier "MPU6050_SDA_Pin" is undefined
+  	IIC_Soft.IIC_Registered(&MPU6050_IIC, MPU6050_SCL_GPIO_Port, MPU6050_SCL_Pin, MPU6050_SDA_GPIO_Port, MPU6050_SDA_Pin);
+..\MPU6050\eMPL\inv_mpu.c: 0 warnings, 15 errors
+compiling PID.c...
+compiling ADC2.c...
+compiling HC_SR04.c...
+..\App\HC_SR04.c(116): warning:  #940-D: missing return statement at end of non-void function "HC_SR04_Elude" 
+  }
+..\App\HC_SR04.c: 1 warning, 0 errors
+compiling IR_Sensor.c...
+compiling oled.c...
+compiling Uart.c...
+compiling inv_mpu_dmp_motion_driver.c...
+"Car_HAL\Car_HAL.axf" - 75 Error(s), 17 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.9.0.pack
+                ARM.CMSIS.5.9.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.6.0
+
+Package Vendor: Keil
+                https://www.keil.com/pack/Keil.STM32F1xx_DFP.2.4.1.pack
+                Keil.STM32F1xx_DFP.2.4.1
+                STMicroelectronics STM32F1 Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  ./RTE/_Car_HAL
+  E:/keil1/ARM/CMSIS/5.9.0/CMSIS/Core/Include
+  E:/keil1/Keil/STM32F1xx_DFP/2.4.1/Device/Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.6.0
+      Include file:  CMSIS/Core/Include/tz_context.h
+Target not created.
+Build Time Elapsed:  00:00:11
+</pre>
+</body>
+</html>

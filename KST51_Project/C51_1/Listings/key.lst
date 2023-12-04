@@ -1,0 +1,238 @@
+C51 COMPILER V9.60.7.0   KEY                                                               11/11/2023 13:00:53 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE KEY
+OBJECT MODULE PLACED IN .\Objects\key.obj
+COMPILER INVOKED BY: E:\keil1\C51\BIN\C51.EXE USER\key.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\USER;.\USER;.\USER\iic;.\USER
+                    -\EEPROM;.\USER\time;.\USER\DS18B20;.\USER\DS1302;.\USER\ired) DEBUG OBJECTEXTEND PRINT(.\Listings\key.lst) TABS(2) OBJEC
+                    -T(.\Objects\key.obj)
+
+line level    source
+
+   1          #include "AllHead.h"
+   2          
+   3          /******************************************************************************
+   4          * 函 数 名 : key_scan
+   5          * 函数功能 : 检测独立按键是否按下，按下则返回对应键值
+   6          * 输 入    : mode=0：单次扫描按键
+   7                       mode=1：连续扫描按键
+   8          * 输 出 :    KEY1_PRESS：K1 按下
+   9                       KEY2_PRESS：K2 按下
+  10                       KEY3_PRESS：K3 按下
+  11                       KEY4_PRESS：K4 按下
+  12                       KEY_UNPRESS：未有按键按下
+  13          ********************************************************************************/
+  14          /*u8 key_scan(u8 mode)
+  15          {
+  16            static u8 key = 1; //定义一个静态变量
+  17            if(mode) key = 1; //如果mode=1则表示连续扫描按键 如果mode=0则忽略这句话
+  18            if(key == 1 && (KEY1 == 0 || KEY2 == 0 || KEY3 == 0 || KEY4 == 0 )) //任意按键按下
+  19            {
+  20              Delay1ms(10);  //消抖
+  21              key = 0;
+  22              if(KEY1 == 0)         //如果按键仍然处于被按下状态则表明按键真的被按下了
+  23                return KEY1_PRESS;  
+  24              else if(KEY2 == 0)
+  25                return KEY2_PRESS;
+  26              else if(KEY3 == 0)
+  27                return KEY3_PRESS;
+  28              else if(KEY4 == 0)
+  29                return KEY4_PRESS;
+  30            }
+  31            else if(KEY1 == 1 && KEY2 == 1 && KEY3 == 1 && KEY4 == 1 )  //无按键按下
+  32            {
+  33              key = 1;
+  34            }
+  35            return KEY_UNPRESS;
+  36          }*/
+  37          
+  38          
+  39          /***************************************************************************************
+  40          * 函 数 名 : key_matrix_ranks_scan
+  41          * 函数功能 : 使用行列式扫描方法，检测矩阵按键是否按下，按下则返回对应键值
+  42          * 输 入 : 无
+  43          * 输 出 : key_value：1-16，对应 S1-S16 键，
+  44          0：按键未按下
+  45          ****************************************************************************************/
+  46          /*u8 key_matrix_ranks_scan(void) //行列式扫描函数
+  47          {
+  48            u8 key_value = 0;
+  49            KEY_MATRIX_PORT = 0xf7;  //给第一列赋值0，其余全为1  1111 0111 --> 0xf7
+  50            if(KEY_MATRIX_PORT != 0xf7)  //判断第一列按键是否按下(若按下则矩阵按键控制管脚不等于0xf7)
+  51            {
+  52              Delay1ms(10);  //消抖
+  53              switch(KEY_MATRIX_PORT) //保存第一列按键按下后的键值
+C51 COMPILER V9.60.7.0   KEY                                                               11/11/2023 13:00:53 PAGE 2   
+
+  54              {
+  55                case 0x77: key_value = 1;  break; //S1
+  56                case 0xb7: key_value = 5;  break; //S5
+  57                case 0xd7: key_value = 9;  break; //S9
+  58                case 0xe7: key_value = 13; break; //S13
+  59              }
+  60            }
+  61            while(KEY_MATRIX_PORT != 0xf7); //等待按键松开(松开矩阵按键控制管脚等于0xf7则退出循环)
+  62            
+  63            KEY_MATRIX_PORT = 0xfb;  //给第二列赋值0，其余全为1  1111 1011 --> 0xfb
+  64            if(KEY_MATRIX_PORT != 0xfb)  //判断第二列按键是否按下(若按下则矩阵按键控制管脚不等于0xfb)
+  65            {
+  66              Delay1ms(10);  //消抖
+  67              switch(KEY_MATRIX_PORT) //保存第二列按键按下后的键值
+  68              {
+  69                case 0x7b: key_value = 2;  break;  //S2
+  70                case 0xbb: key_value = 6;  break;  //S6
+  71                case 0xdb: key_value = 10;  break; //S10
+  72                case 0xeb: key_value = 14; break;  //S14
+  73              }
+  74            }
+  75            while(KEY_MATRIX_PORT != 0xfb); //等待按键松开(松开矩阵按键控制管脚等于0xfb则退出循环)
+  76            
+  77            KEY_MATRIX_PORT = 0xfd;  //给第三列赋值0，其余全为1  1111 1101 --> 0xfd
+  78            if(KEY_MATRIX_PORT != 0xfd)  //判断第三列按键是否按下(若按下则矩阵按键控制管脚不等于0xfd)
+  79            {
+  80              Delay1ms(10);  //消抖
+  81              switch(KEY_MATRIX_PORT) //保存第三列按键按下后的键值
+  82              {
+  83                case 0x7d: key_value = 3;  break; //S3
+  84                case 0xbd: key_value = 7;  break; //S7
+  85                case 0xdd: key_value = 11;  break; //S11
+  86                case 0xed: key_value = 15; break; //S15
+  87              }
+  88            } 
+  89            while(KEY_MATRIX_PORT != 0xfd); //等待按键松开(松开矩阵按键控制管脚等于0xfd则退出循环)
+  90            
+  91            KEY_MATRIX_PORT = 0xfe;  //给第四列赋值0，其余全为1  1111 1110 --> 0xfe
+  92            if(KEY_MATRIX_PORT != 0xfe) //判断第四列按键是否按下(若按下则矩阵按键控制管脚不等于0xfe)
+  93            {
+  94              Delay1ms(10);  //消抖
+  95              switch(KEY_MATRIX_PORT) //保存第四列按键按下后的键值
+  96              {
+  97                case 0x7e: key_value = 4;  break; //S4
+  98                case 0xbe: key_value = 8;  break; //S8
+  99                case 0xde: key_value = 12;  break; //S12
+ 100                case 0xee: key_value = 16; break; //S16
+ 101              }
+ 102            }
+ 103            while(KEY_MATRIX_PORT != 0xfe); //等待按键松开(松开矩阵按键控制管脚等于0xfe则退出循环)
+ 104            
+ 105            return key_value; 
+ 106          }*/
+ 107          
+ 108          
+ 109          /*******************************************************************************
+ 110          
+ 111          * 函 数 名 : key_matrix_flip_scan
+ 112          * 函数功能 : 使用线翻转扫描方法，检测矩阵按键是否按下，按下则返回对应键值
+ 113          * 输 入 : 无
+ 114          * 输 出 : key_value：1-16，对应 S1-S16 键，
+ 115          0：按键未按下
+C51 COMPILER V9.60.7.0   KEY                                                               11/11/2023 13:00:53 PAGE 3   
+
+ 116          ********************************************************************************/
+ 117          /*u8 key_matrix_flip_scan(void)
+ 118          {
+ 119            static u8 key_value = 0; //键值
+ 120            KEY_MATRIX_PORT = 0x0f;  //行为低电平，测试列 给所有行赋值0，列全为1  0000 1111 --> 0x0f
+ 121            if(KEY_MATRIX_PORT != 0x0f)  //判断按键是否按下(若按下则矩阵按键控制管脚不等于0x0f)
+ 122            {
+ 123              Delay1ms(10);  //消抖
+ 124              if(KEY_MATRIX_PORT != 0x0f)
+ 125              { 
+ 126                //测试列
+ 127                KEY_MATRIX_PORT = 0x0f;  //行为低电平，测试列 给所有行赋值0，列全为1  0000 1111 --> 0x0f
+ 128                switch(KEY_MATRIX_PORT)  //保存行为0，按键按下后的列值
+ 129                {
+ 130                  case 0x07: key_value = 1; break; //第一列 0000 0111 --> 0x07
+ 131                  case 0x0b: key_value = 2; break; //第二列 0000 1011 --> 0x0b
+ 132                  case 0x0d: key_value = 3; break; //第三列 0000 1101 --> 0x0d
+ 133                  case 0x0e: key_value = 4; break; //第四列 0000 1110 --> 0x0e
+ 134                }
+ 135                //测试行
+ 136                KEY_MATRIX_PORT = 0xf0;  //列为低电平，测试行 给所有行赋值1，列全为0  1111 0000 --> 0xf0
+ 137                switch(KEY_MATRIX_PORT)  //保存列为0，按键按下后的键值
+ 138                {
+ 139                  case 0x70: key_value = key_value;      break;  //第一行 0111 0000 --> 0x70
+ 140                  case 0xb0: key_value = key_value + 4;  break;  //第二行 1011 0000 --> 0xb0
+ 141                  case 0xd0: key_value = key_value + 8;  break;  //第三行 1101 0000 --> 0xd0
+ 142                  case 0xe0: key_value = key_value + 12; break;  //第四行 1110 0000 --> 0xe0
+ 143                }
+ 144                while(KEY_MATRIX_PORT != 0xf0);  //等待按键松开(松开矩阵按键控制管脚等于0xf0则退出循环)
+ 145              }
+ 146            }
+ 147            else 
+ 148              key_value = 0;
+ 149            return key_value;
+ 150          }*/
+ 151          
+ 152          
+ 153          //u8 key_ketNumber = 0;
+ 154          /**
+ 155            * @brief  获取按键键码
+ 156            * @param  无
+ 157            * @retval 按下按键的键码，范围：0,1~4,0表示无按键按下
+ 158            */
+ 159          /*u8 key(void)
+ 160          {
+ 161            u8 temp;
+ 162            temp = key_ketNumber;
+ 163            key_ketNumber = 0;
+ 164            return temp;
+ 165          }*/
+ 166          
+ 167          
+ 168          /**
+ 169            * @brief  获取当前按键的状态，无消抖及松手检测
+ 170            * @param  无
+ 171            * @retval 按下按键的键码，范围：0,1~4,0表示无按键按下
+ 172            */
+ 173          /*u8 Key_GetState()
+ 174          {
+ 175            u8 KeyNumber = 0;
+ 176            if(KEY1 == 0)             //如果按键1按下
+ 177              KeyNumber = KEY1_PRESS; // 按键值1
+C51 COMPILER V9.60.7.0   KEY                                                               11/11/2023 13:00:53 PAGE 4   
+
+ 178            if(KEY2 == 0)             //如果按键2按下
+ 179              KeyNumber = KEY2_PRESS; // 按键值2
+ 180            if(KEY3 == 0)             //如果按键3按下
+ 181              KeyNumber = KEY3_PRESS; // 按键值3
+ 182            if(KEY4 == 0)             //如果按键4按下
+ 183              KeyNumber = KEY4_PRESS; // 按键值4
+ 184            return KeyNumber;         //返回按键值
+ 185          }*/
+ 186            
+ 187          /**
+ 188            * @brief  按键驱动函数，在中断中调用
+ 189            * @param  无
+ 190            * @retval 无
+ 191            */
+ 192          /*void Key_loop(void)
+ 193          {
+ 194            static u8 NowState,LastState;
+ 195            LastState = NowState;      //按键状态更新
+ 196            NowState = Key_GetState(); //获取当前按键状态
+ 197            //如果上个时间点按键按下，这个时间点未按下，则是松手瞬间，以此避免消抖和松手检测
+ 198            if(LastState == KEY1_PRESS && NowState == KEY_UNPRESS)
+ 199              key_ketNumber = KEY1_PRESS;
+ 200            if(LastState == KEY2_PRESS && NowState == KEY_UNPRESS)
+ 201              key_ketNumber = KEY2_PRESS;
+ 202            if(LastState == KEY3_PRESS && NowState == KEY_UNPRESS)
+ 203              key_ketNumber = KEY3_PRESS;
+ 204            if(LastState == KEY4_PRESS && NowState == KEY_UNPRESS)
+ 205              key_ketNumber = KEY4_PRESS;
+ 206          }*/
+ 207            
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   ----    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

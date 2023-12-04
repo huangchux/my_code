@@ -1,0 +1,5 @@
+".\Objects\main.obj",
+".\Objects\LED.obj",
+".\Objects\smg.obj" 
+TO ".\Objects\temple" 
+PRINT(".\Listings\temple.m51") RAMSIZE(256) 

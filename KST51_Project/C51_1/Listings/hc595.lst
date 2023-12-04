@@ -1,0 +1,60 @@
+C51 COMPILER V9.60.7.0   HC595                                                             11/11/2023 13:00:53 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE HC595
+OBJECT MODULE PLACED IN .\Objects\hc595.obj
+COMPILER INVOKED BY: E:\keil1\C51\BIN\C51.EXE USER\hc595.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\USER;.\USER;.\USER\iic;.\US
+                    -ER\EEPROM;.\USER\time;.\USER\DS18B20;.\USER\DS1302;.\USER\ired) DEBUG OBJECTEXTEND PRINT(.\Listings\hc595.lst) TABS(2) O
+                    -BJECT(.\Objects\hc595.obj)
+
+line level    source
+
+   1          #include "AllHead.h"
+   2          /*******************************************************************************
+   3          
+   4          * 函 数 名 : hc595_write_data(u8 dat)
+   5          * 函数功能 : 向 74HC595 写入一个字节的数据
+   6          * 输 入 : dat：数据
+   7          * 输 出 : 无
+   8          ********************************************************************************/
+   9          /*void hc595_write_data(u8 dat)
+  10          {
+  11            u8 i = 0;
+  12            for(i = 0; i < 8; i++) //循环8次即可将一个字节写入移位寄存器中(该寄存器先传输高位）
+  13            {
+  14              SER  = dat >> 7;     //优先传输一个字节中的高位  1000 0000 --> 0000 0001 (将高位移到最低位)
+  15              dat <<= 1;           //将低位移动到高位(将次高位移到最高位) 
+  16              SRCLK = 0;        
+  17              delay_10us(1);       
+  18              SRCLK = 1;           //移位寄存器时钟上升沿将端口数据送入寄存器中 (上升沿：先低位后高位 先=0,后=1)
+  19              delay_10us(1);       
+  20            }
+  21            rCLK = 0;
+  22            delay_10us(1);
+  23            rCLK = 1;              //存储寄存器时钟上升沿将前面写入到寄存器的数据输出 (上升沿：先低位后高位 先=0,后=1
+             -) 
+  24          }*/
+  25          
+  26          //LED点阵显示函数 参数一：LED点阵列数 参数二：传输数据
+  27          /*void MatrixLED_ShowCol(u8 col,u8 dat) 
+  28          {
+  29            hc595_write_data(dat);
+  30            LEDDZ_COL_PORT = ~(0x80 >> col); //LED点阵第一列向右移动 1000 1111 按位取反--> 0111 1111
+  31            Delay1ms(1);
+  32            LEDDZ_COL_PORT = 0xff; //消影
+  33          }*/
+  34            
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   ----    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

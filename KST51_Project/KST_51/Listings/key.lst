@@ -1,0 +1,123 @@
+C51 COMPILER V9.60.7.0   KEY                                                               09/24/2023 14:21:07 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE KEY
+OBJECT MODULE PLACED IN .\Objects\key.obj
+COMPILER INVOKED BY: E:\keil1\C51\BIN\C51.EXE APP\key\key.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\USER;.\APP\smg;.\APP\time;
+                    -.\APP\key) DEBUG OBJECTEXTEND PRINT(.\Listings\key.lst) TABS(2) OBJECT(.\Objects\key.obj)
+
+line level    source
+
+   1          #include "AllHead.h"
+*** ERROR C129 IN LINE 14 OF APP\key\key.h: missing ';' before 'key_sate'
+   2          
+   3          void KeyDriver();
+   4          void KeyAction(u8 keycode);
+   5          
+   6          u8 code KeyCodeMap[4][4] = { //矩阵按键编号到标准键盘键码的映射表
+   7                      { 0x31, 0x32, 0x33, 0x26 }, //数字键 1、数字键 2、数字键 3、向上键
+   8                      { 0x34, 0x35, 0x36, 0x25 }, //数字键 4、数字键 5、数字键 6、向左键
+   9                      { 0x37, 0x38, 0x39, 0x28 }, //数字键 7、数字键 8、数字键 9、向下键
+  10                      { 0x30, 0x1B, 0x0D, 0x27 } //数字键 0、ESC 键、 回车键、 向右键
+  11                      };
+  12          u8 key_sate[4][4] = {{1,1,1,1},{1,1,1,1},{1,1,1,1},{1,1,1,1}};
+  13          
+  14            
+  15            
+  16          /* 按键驱动函数，检测按键动作，调度相应动作函数，需在主循环中调用 */
+  17          void KeyDriver()
+  18          {
+  19            u8 i,j;
+  20            static u8 backup[4][4] = {{1,1,1,1},{1,1,1,1},{1,1,1,1},{1,1,1,1}};
+  21            for(i = 0;i < 4;i++)
+  22            {
+  23              for(j = 0;j < 4;j++)
+  24              {
+  25                if(key_sate[i][j] != backup[i][j])
+  26                {
+  27                  if(backup[i][j] != 0)
+  28                  {
+  29                    KeyAction(KeyCodeMap[i][j]); //调用按键动作函数
+  30                  }
+  31                  backup[i][j] = key_sate[i][j];
+  32                }
+  33              }
+  34            }
+  35          }
+  36          
+  37          /* 按键动作函数，根据键码执行相应的操作，keycode-按键键码 */
+  38          void KeyAction(u8 keycode)
+  39          {
+  40            static u32 result = 0;
+  41            static u32 addend = 0;
+  42            
+  43            if ((keycode >= 0x30) && (keycode <= 0x39))
+  44            {
+  45              addend = (addend * 10) + (keycode - 0x30);
+  46          //    SMG_Show(addend); //运算结果显示到数码管
+  47            }
+  48            else if (0x26 == keycode)
+  49            {
+  50              result += addend;
+  51              addend = 0;
+  52          //    SMG_Show(result); //运算结果显示到数码管
+  53            }
+C51 COMPILER V9.60.7.0   KEY                                                               09/24/2023 14:21:07 PAGE 2   
+
+  54            else if (0x0D == keycode)
+  55            {
+  56              result += addend;
+  57              addend = 0;
+  58          //    SMG_Show(result); //运算结果显示到数码管
+  59            }
+  60            else if (0x1B == keycode)
+  61            {
+  62              addend = 0;
+  63              result = 0;
+  64          //    SMG_Show(addend); //运算结果显示到数码管
+  65            }
+  66          }
+  67          
+  68          /* 按键扫描函数，需在定时中断中调用，推荐调用间隔 1ms */
+  69          void key_scan()
+  70          {
+  71            u8 i = 0;
+  72            static u8 KeyOut = 0;
+  73            static u8 keybuf[4][4] = {{0xFF,0xFF,0xFF,0xFF},{0xFF,0xFF,0xFF,0xFF},
+  74                                      {0xFF,0xFF,0xFF,0xFF},{0xFF,0xFF,0xFF,0xFF}};
+  75            keybuf[KeyOut][0] = (keybuf[KeyOut][0] << 1) | KeyIn1;
+  76            keybuf[KeyOut][1] = (keybuf[KeyOut][1] << 1) | KeyIn2;
+  77            keybuf[KeyOut][2] = (keybuf[KeyOut][2] << 1) | KeyIn3;
+  78            keybuf[KeyOut][3] = (keybuf[KeyOut][3] << 1) | KeyIn4;
+  79                                      
+  80                                      
+  81            for (i = 0; i < 4; i++)
+  82            {
+  83              if (0x00 == (keybuf[KeyOut][i] & 0x0F))
+  84              {
+  85                key_sate[KeyOut][i] = 0;
+  86              }
+  87              if (0x0F == (keybuf[KeyOut][i] & 0x0F))
+  88              {
+  89                key_sate[KeyOut][i] = 1;
+  90              }
+  91            }
+  92            
+  93            KeyOut++;
+  94            
+  95            if (KeyOut > 4)
+  96            {
+  97              KeyOut = 0;
+  98            }
+  99            
+ 100            switch(KeyOut)
+ 101            {
+ 102              case 0: KeyOut4 = 1;KeyOut1 = 0;break;
+ 103              case 1: KeyOut1 = 1;KeyOut2 = 0;break;
+ 104              case 2: KeyOut2 = 1;KeyOut3 = 0;break;
+ 105              case 3: KeyOut3 = 1;KeyOut4 = 0;break;
+ 106              default:break;
+ 107            }
+ 108          }
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)

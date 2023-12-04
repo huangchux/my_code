@@ -1,0 +1,96 @@
+C51 COMPILER V9.60.7.0   SMG                                                               09/26/2023 01:21:28 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE SMG
+OBJECT MODULE PLACED IN .\Objects\SMG.obj
+COMPILER INVOKED BY: E:\keil1\C51\BIN\C51.EXE APP\SMG.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\USER;.\APP) DEBUG OBJECTEXTEND
+                    - PRINT(.\Listings\SMG.lst) TABS(2) OBJECT(.\Objects\SMG.obj)
+
+line level    source
+
+   1          #include "AllHead.h"
+   2          
+   3          u8 code gsmg[] = {0xC0, 0xF9, 0xA4, 0xB0, 0x99, 0x92, 0x82, 0xF8,
+   4                            0x80, 0x90, 0x88, 0x83, 0xC6, 0xA1, 0x86, 0x8E}; //数码管显示字符转换表
+   5          
+   6          u8 SMG_BUFF[6] = {0xFF,0xFF,0xFF,0xFF,0xFF,0xFF}; //数码管显示缓冲区
+   7          
+   8          /* 数码管动态扫描刷新函数，需在定时中断中调用 */
+   9          void SMG_Scan()
+  10          {
+  11   1        static u8 i = 0; //动态扫描的索引
+  12   1        
+  13   1        LED_SMG_PORT = 0xFF; //显示消隐
+  14   1        
+  15   1        switch(i)
+  16   1        {
+  17   2          case 0: ADDR2 = 0;ADDR1 = 0; ADDR0 = 0; i++; LED_SMG_PORT = SMG_BUFF[0]; break;
+  18   2          case 1: ADDR2 = 0;ADDR1 = 0; ADDR0 = 1; i++; LED_SMG_PORT = SMG_BUFF[1]; break;
+  19   2          case 2: ADDR2 = 0;ADDR1 = 1; ADDR0 = 0; i++; LED_SMG_PORT = SMG_BUFF[2]; break;
+  20   2          case 3: ADDR2 = 0;ADDR1 = 1; ADDR0 = 1; i++; LED_SMG_PORT = SMG_BUFF[3]; break;
+  21   2          case 4: ADDR2 = 1;ADDR1 = 0; ADDR0 = 0; i++; LED_SMG_PORT = SMG_BUFF[4]; break;
+  22   2          case 5: ADDR2 = 1;ADDR1 = 0; ADDR0 = 1; i=0; LED_SMG_PORT = SMG_BUFF[5]; break;
+  23   2          default: break;
+  24   2        }
+  25   1      }
+  26          
+  27          /* 将一个无符号长整型的数字显示到数码管上，num-待显示数字 */
+  28          void SMG_Show(u32 num)
+  29          {
+  30   1        signed char i;
+  31   1        u8 sign = 0;
+  32   1        u8 buf[6];
+  33   1        if(num < 0) //首先提取并暂存符号位
+  34   1        {
+  35   2          sign = 1;
+  36   2          num = -num;
+  37   2        }
+  38   1        else
+  39   1        {
+  40   2          sign = 0;
+  41   2        }
+  42   1        for (i = 0; i < 6; i++) //把长整型数转换为 6 位十进制的数组
+  43   1        {
+  44   2          buf[i] = num % 10;
+  45   2          num /= 10;
+  46   2        }
+  47   1        
+  48   1        for (i = 5; i > 0; i--) //从最高位起，遇到 0 转换为空格，遇到非 0 则退出循环
+  49   1        { 
+  50   2          if (0 == buf[i])
+  51   2          {
+  52   3            buf[i] = 0xFF;
+  53   3          }
+  54   2          else
+C51 COMPILER V9.60.7.0   SMG                                                               09/26/2023 01:21:28 PAGE 2   
+
+  55   2          {
+  56   3            break;
+  57   3          }
+  58   2        }
+  59   1        if(sign == 1) //负数时，需在最前面添加负号
+  60   1        {
+  61   2          if(i < 5)   //当有效位数小于6位时添加负号，否则显示结果将是错的
+  62   2          {
+  63   3            SMG_BUFF[i + 1] = 0xBF; //负号的数码管值为0xBF
+  64   3          }
+  65   2        }
+  66   1        for (; i >= 0; i--) //剩余低位都如实转换为数码管显示字符
+  67   1        {
+  68   2          SMG_BUFF[i] = gsmg[buf[i]];
+  69   2        }
+  70   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    283    ----
+   CONSTANT SIZE    =     16    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      7      12
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

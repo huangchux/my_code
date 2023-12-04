@@ -1,0 +1,114 @@
+C51 COMPILER V9.60.7.0   EEPROM                                                            11/11/2023 13:00:54 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE EEPROM
+OBJECT MODULE PLACED IN .\Objects\EEPROM.obj
+COMPILER INVOKED BY: E:\keil1\C51\BIN\C51.EXE USER\EEPROM\EEPROM.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\USER;.\USER;.\USER\
+                    -iic;.\USER\EEPROM;.\USER\time;.\USER\DS18B20;.\USER\DS1302;.\USER\ired) DEBUG OBJECTEXTEND PRINT(.\Listings\EEPROM.lst) 
+                    -TABS(2) OBJECT(.\Objects\EEPROM.obj)
+
+line level    source
+
+   1          #include "AllHead.h"
+   2          
+   3          ///*******************************************************************************
+   4          //* 函 数 名 : EEPROM_write_one_byte
+   5          //* 函数功能 : 在 EEPROM 指定地址写入一个数据
+   6          //* 输 入 : addr:写入数据的目的地址
+   7          //          dat:要写入的数据
+   8          //* 输 出 : 无
+   9          //*******************************************************************************/
+  10          //void EEPROM_write_one_byte(u8 addr,u8 dat)
+  11          //{
+  12          //  iic_start();
+  13          //  iic_write_byte(0xA0);  //发送写命令(前面4位固定，后面三位接gnd所以是0)
+  14          //  iic_wait_ack();
+  15          //  iic_write_byte(addr);  //发送写地址
+  16          //  iic_wait_ack();
+  17          //  iic_write_byte(dat);   //发送字节
+  18          //  iic_wait_ack();
+  19          //  iic_stop();            //产生一个停止条件
+  20          //  Delay1ms(10);
+  21          //}
+  22          
+  23          
+  24          ///*******************************************************************************
+  25          //* 函 数 名 : EEPROM_read_one_byte
+  26          //* 函数功能 : 在 EEPROM 指定地址读出一个数据
+  27          //* 输 入 : addr:开始读数的地址
+  28          //* 输 出 : 读到的数据
+  29          //*******************************************************************************/
+  30          //u8 EEPROM_read_one_byte(u8 addr)
+  31          //{
+  32          //  u8 receive = 0;
+  33          //  iic_start();
+  34          //  iic_write_byte(0xA0);  //发送写命令(寻找从机) 最后一位为0表示主机向从机写数据
+  35          //  iic_wait_ack();
+  36          //  iic_write_byte(addr);  //在EEPROM指定一个地址(将要接收的数据存放到这个地址)
+  37          //  iic_wait_ack();
+  38          //  iic_start();           //再次启动总线
+  39          //  iic_write_byte(0xA1);  //进入接收模式   最后一位为1表示主机由从机读数据
+  40          //  iic_wait_ack();
+  41          //  receive = iic_read_byte(addr);  //读取字节
+  42          //  iic_stop();            //产生一个停止条件
+  43          //  return receive;        //返回读取的数据
+  44          //}
+  45          
+  46          
+  47          
+  48          
+  49          ///**
+  50          //  * @brief  AT24C02写入一个字节
+  51          //  * @param  WordAddress 要写入字节的地址
+  52          //  * @param  Data 要写入的数据
+  53          //  * @retval 无
+C51 COMPILER V9.60.7.0   EEPROM                                                            11/11/2023 13:00:54 PAGE 2   
+
+  54          //  */
+  55          //void EEPROM_WriteByte(u8 addr,u8 Data)
+  56          //{
+  57          //  I2C_Start();
+  58          //  I2C_SendByte(0xA0);  //发送写命令(前面4位固定，后面三位接gnd所以是0)
+  59          //  I2C_ReceiveAck();
+  60          //  I2C_SendByte(addr);  //发送写地址
+  61          //  I2C_ReceiveAck();
+  62          //  I2C_SendByte(Data);  //发送字节
+  63          //  I2C_ReceiveAck();
+  64          //  I2C_Stop();          //产生一个停止条件
+  65          //}
+  66          
+  67          ///**
+  68          //  * @brief  AT24C02读取一个字节
+  69          //  * @param  WordAddress 要读出字节的地址
+  70          //  * @retval 读出的数据
+  71          //  */
+  72          //u8 EEPROM_ReadByte(u8 addr)
+  73          //{
+  74          //  u8 Data;
+  75          //  I2C_Start();
+  76          //  I2C_SendByte(0xA0);  //发送写命令(寻找从机) 最后一位为0表示主机向从机写数据
+  77          //  I2C_ReceiveAck();
+  78          //  I2C_SendByte(addr);  //在EEPROM指定一个地址(将要接收的数据存放到这个地址)
+  79          //  I2C_ReceiveAck();
+  80          //  I2C_Start();         //再次启动总线
+  81          //  I2C_SendByte(0xA1);  //进入接收模式   最后一位为1表示主机由从机读数据
+  82          //  I2C_ReceiveAck();
+  83          //  Data=I2C_ReceiveByte();  //读取字节
+  84          //  I2C_SendAck(1);
+  85          //  I2C_Stop();          //产生一个停止条件
+  86          //  return Data;         //返回读取的数据
+  87          //}
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   ----    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

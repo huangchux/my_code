@@ -1,0 +1,43 @@
+C51 COMPILER V9.60.7.0   TIME                                                              09/21/2023 12:59:56 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TIME
+OBJECT MODULE PLACED IN .\Objects\time.obj
+COMPILER INVOKED BY: E:\keil1\C51\BIN\C51.EXE APP\time\time.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\APP\time;.\APP\smg;.\APP
+                    -\LED;.\APP) DEBUG OBJECTEXTEND PRINT(.\Listings\time.lst) TABS(2) OBJECT(.\Objects\time.obj)
+
+line level    source
+
+   1          #include "AllHead.h"
+   2          /* -------------------------------- begin  ------------------------------ */
+   3          /**
+   4            * @函数名:  Time0_Init
+   5            * @功能 : 定时器0中断配置函数，通过设置 TH 和 TL 即可确定定时时间(使用工具�
+             -��确定TH 与TL的值)
+   6            * @返回值: 无                                                   晶振频率为11.0592
+   7           **/
+   8          /* -------------------------------- end -------------------------------- */
+   9          void Time0_Init()
+  10          {
+  11   1        EA = 1;        //开启总中断
+  12   1        TMOD &= 0xF0;  //设置定时器模式
+  13   1        TMOD |= 0x01;  //定时器模式1
+  14   1        TH0 = 0XFC;    //定时1毫秒
+  15   1        TL0 = 0x66;
+  16   1        ET0 =1;        //使能定时器0中断
+  17   1        TR0 = 1;       //启动定时器0
+  18   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     19    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

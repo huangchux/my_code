@@ -1,0 +1,439 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    11/11/2023  13:00:55  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+E:\KEIL1\C51\BIN\BL51.EXE .\Objects\main.obj, .\Objects\LED.obj, .\Objects\Delay.obj, .\Objects\BEEP.obj, .\Objects\smg.
+>> obj, .\Objects\key.obj, .\Objects\hc595.obj, .\Objects\step_motor.obj, .\Objects\EXTI.obj, .\Objects\uart.obj, .\Obje
+>> cts\iic.obj, .\Objects\EEPROM.obj, .\Objects\time.obj, .\Objects\ds18b20.obj, .\Objects\ds1302.obj, .\Objects\ired.ob
+>> j TO .\Objects\C51_1 PRINT (.\Listings\C51_1.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\main.obj (MAIN)
+  .\Objects\LED.obj (LED)
+  .\Objects\Delay.obj (DELAY)
+  .\Objects\BEEP.obj (BEEP)
+  .\Objects\smg.obj (SMG)
+  .\Objects\key.obj (KEY)
+  .\Objects\hc595.obj (HC595)
+  .\Objects\step_motor.obj (STEP_MOTOR)
+  .\Objects\EXTI.obj (EXTI)
+  .\Objects\uart.obj (UART)
+  .\Objects\iic.obj (IIC)
+  .\Objects\EEPROM.obj (EEPROM)
+  .\Objects\time.obj (TIME)
+  .\Objects\ds18b20.obj (DS18B20)
+  .\Objects\ds1302.obj (DS1302)
+  .\Objects\ired.obj (IRED)
+  E:\KEIL1\C51\LIB\C51S.LIB (?C?CLDOPTR)
+
+
+LINK MAP OF MODULE:  .\Objects\C51_1 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0011H     UNIT         ?DT?SMG
+            DATA    0019H     0005H     UNIT         ?DT?_SMG_DISPLAY?SMG
+            DATA    001EH     0005H     UNIT         _DATA_GROUP_
+            DATA    0023H     0004H     UNIT         ?DT?IRED
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+                    0000H     0003H                  *** GAP ***
+            CODE    0003H     0003H     ABSOLUTE     
+            CODE    0006H     012CH     UNIT         ?PR?IRED?IRED
+            CODE    0132H     0092H     UNIT         ?PR?_SMG_DISPLAY?SMG
+            CODE    01C4H     002DH     UNIT         ?C?LIB_CODE
+            CODE    01F1H     0013H     UNIT         ?C_INITSEG
+            CODE    0204H     000BH     UNIT         ?PR?_DELAY_10US?DELAY
+            CODE    020FH     0009H     UNIT         ?PR?IRED_INIT?IRED
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\C51_1 (MAIN)
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  11/11/2023  13:00:55  PAGE 2
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?PR?IRED?IRED                  001EH    0005H
+  +--> ?PR?_DELAY_10US?DELAY
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\C51_1 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        LED
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         ENDMOD        LED
+
+  -------         MODULE        DELAY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  C:0204H         PUBLIC        _delay_10us
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          _DELAY_10US
+  D:0006H         SYMBOL        ten_us
+  C:0204H         LINE#         12
+  C:0204H         LINE#         13
+  C:0204H         LINE#         14
+  C:020EH         LINE#         15
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  11/11/2023  13:00:55  PAGE 3
+
+
+  -------         ENDPROC       _DELAY_10US
+  -------         ENDMOD        DELAY
+
+  -------         MODULE        BEEP
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         ENDMOD        BEEP
+
+  -------         MODULE        SMG
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  C:0132H         PUBLIC        _smg_display
+  D:0008H         PUBLIC        gsmg_code
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  B:00A0H.2       PUBLIC        LSA
+  B:00A0H.3       PUBLIC        LSB
+  B:00A0H.4       PUBLIC        LSC
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          _SMG_DISPLAY
+  D:0019H         SYMBOL        dat
+  D:0005H         SYMBOL        location
+  -------         DO            
+  D:001CH         SYMBOL        i
+  D:001DH         SYMBOL        location_temp
+  -------         ENDDO         
+  C:0132H         LINE#         65
+  C:0138H         LINE#         66
+  C:0138H         LINE#         67
+  C:013BH         LINE#         68
+  C:013FH         LINE#         69
+  C:0148H         LINE#         70
+  C:0148H         LINE#         71
+  C:016EH         LINE#         72
+  C:016EH         LINE#         73
+  C:0172H         LINE#         74
+  C:0176H         LINE#         75
+  C:017AH         LINE#         76
+  C:017EH         LINE#         77
+  C:0186H         LINE#         78
+  C:018EH         LINE#         79
+  C:0196H         LINE#         80
+  C:019CH         LINE#         81
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  11/11/2023  13:00:55  PAGE 4
+
+
+  C:019CH         LINE#         82
+  C:01B4H         LINE#         83
+  C:01BBH         LINE#         84
+  C:01BEH         LINE#         85
+  C:01C3H         LINE#         86
+  -------         ENDPROC       _SMG_DISPLAY
+  -------         ENDMOD        SMG
+
+  -------         MODULE        KEY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         ENDMOD        KEY
+
+  -------         MODULE        HC595
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         ENDMOD        HC595
+
+  -------         MODULE        STEP_MOTOR
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         ENDMOD        STEP_MOTOR
+
+  -------         MODULE        EXTI
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00C8H         PUBLIC        T2CON
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  11/11/2023  13:00:55  PAGE 5
+
+
+  D:00D0H         PUBLIC        PSW
+  -------         ENDMOD        EXTI
+
+  -------         MODULE        UART
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         ENDMOD        UART
+
+  -------         MODULE        IIC
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         ENDMOD        IIC
+
+  -------         MODULE        EEPROM
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         ENDMOD        EEPROM
+
+  -------         MODULE        TIME
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         ENDMOD        TIME
+
+  -------         MODULE        DS18B20
+  C:0000H         SYMBOL        _ICE_DUMMY_
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  11/11/2023  13:00:55  PAGE 6
+
+
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         ENDMOD        DS18B20
+
+  -------         MODULE        DS1302
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         ENDMOD        DS1302
+
+  -------         MODULE        IRED
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
+  D:0023H         PUBLIC        gired_data
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  B:00B0H.2       PUBLIC        IRED
+  C:0006H         PUBLIC        ired
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  C:020FH         PUBLIC        ired_init
+  B:00A8H.0       PUBLIC        EX0
+  B:0088H.0       PUBLIC        IT0
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          IRED_INIT
+  C:020FH         LINE#         11
+  C:020FH         LINE#         12
+  C:020FH         LINE#         13
+  C:0211H         LINE#         14
+  C:0213H         LINE#         15
+  C:0215H         LINE#         16
+  C:0217H         LINE#         17
+  -------         ENDPROC       IRED_INIT
+  -------         PROC          IRED
+  -------         DO            
+  D:001EH         SYMBOL        time_cnt
+  D:0020H         SYMBOL        i
+  D:0021H         SYMBOL        j
+  D:0022H         SYMBOL        ired_high_time
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  11/11/2023  13:00:55  PAGE 7
+
+
+  -------         ENDDO         
+  C:0006H         LINE#         19
+  C:0023H         LINE#         21
+  C:0029H         LINE#         22
+  C:002FH         LINE#         23
+  C:0032H         LINE#         25
+  C:0038H         LINE#         26
+  C:0038H         LINE#         27
+  C:003EH         LINE#         28
+  C:0047H         LINE#         29
+  C:0047H         LINE#         30
+  C:004EH         LINE#         31
+  C:0056H         LINE#         32
+  C:005FH         LINE#         33
+  C:005FH         LINE#         34
+  C:0065H         LINE#         35
+  C:0065H         LINE#         36
+  C:006BH         LINE#         37
+  C:0074H         LINE#         38
+  C:0074H         LINE#         39
+  C:007BH         LINE#         40
+  C:0083H         LINE#         41
+  C:008CH         LINE#         42
+  C:008CH         LINE#         43
+  C:008FH         LINE#         44
+  C:008FH         LINE#         45
+  C:0092H         LINE#         46
+  C:0092H         LINE#         47
+  C:0098H         LINE#         48
+  C:00A1H         LINE#         49
+  C:00A1H         LINE#         50
+  C:00A8H         LINE#         51
+  C:00B0H         LINE#         52
+  C:00B8H         LINE#         53
+  C:00B8H         LINE#         54
+  C:00BBH         LINE#         55
+  C:00BBH         LINE#         56
+  C:00C2H         LINE#         57
+  C:00C4H         LINE#         58
+  C:00CDH         LINE#         59
+  C:00CDH         LINE#         60
+  C:00DAH         LINE#         61
+  C:00E1H         LINE#         62
+  C:00EAH         LINE#         64
+  C:00EDH         LINE#         65
+  C:00F6H         LINE#         66
+  C:00FFH         LINE#         67
+  C:00FFH         LINE#         68
+  C:0106H         LINE#         69
+  C:0106H         LINE#         70
+  C:0109H         LINE#         71
+  C:0117H         LINE#         73
+  C:0117H         LINE#         74
+  C:0117H         LINE#         75
+  -------         ENDPROC       IRED
+  -------         ENDMOD        IRED
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  11/11/2023  13:00:55  PAGE 8
+
+
+  -------         MODULE        ?C?CLDOPTR
+  C:01C4H         PUBLIC        ?C?CLDOPTR
+  -------         ENDMOD        ?C?CLDOPTR
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SMG_DISPLAY?SMG
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?C_INITSEG
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?IRED_INIT?IRED
+
+Program Size: data=39.0 xdata=0 code=533
+LINK/LOCATE RUN COMPLETE.  3 WARNING(S),  0 ERROR(S)

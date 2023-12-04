@@ -1,0 +1,140 @@
+C51 COMPILER V9.60.7.0   UART                                                              10/24/2023 19:07:34 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE UART
+OBJECT MODULE PLACED IN .\Objects\UART.obj
+COMPILER INVOKED BY: E:\keil1\C51\BIN\C51.EXE APP\UART.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\APP;.\USER) DEBUG OBJECTEXTEN
+                    -D PRINT(.\Listings\UART.lst) TABS(2) OBJECT(.\Objects\UART.obj)
+
+line level    source
+
+   1          #include "AllHead.h"
+   2          
+   3          bit flag = 0;
+   4          u8 rec_buf[10];
+   5          
+   6          /* ´®¿ÚÅäÖÃº¯Êý£¬baud-Í¨ÐÅ²¨ÌØÂÊ */
+   7          void UAER_Init(u16 baud)
+   8          {
+   9   1          SCON = 0x50;  //ÅäÖÃ´®¿ÚÎªÄ£Ê½ 1  0101 0000 --> 0x50
+  10   1          TMOD &= 0x0F; //ÇåÁã T1 µÄ¿ØÖÆÎ»
+  11   1          TMOD |= 0x20; //ÅäÖÃ T1 ÎªÄ£Ê½ 2  0010 0000 --> 0x20
+  12   1          TH1 = 256 - (11059200 / 12 / 32) / baud; //¼ÆËã T1 ÖØÔØÖµ
+  13   1          TL1 = TH1;  //³õÖµµÈÓÚÖØÔØÖµ
+  14   1          
+  15   1          ET1 = 0;    //½ûÖ¹ T1 ÖÐ¶Ï
+  16   1          TR1 = 1;    //Æô¶¯ T1
+  17   1      }
+  18          
+  19          
+  20          /* ´®¿ÚÖÐ¶Ï·þÎñº¯Êý */
+  21          void UART() interrupt 4
+  22          {
+  23   1        u8 rec_dat = 0;
+  24   1        static u8 i = 0;
+  25   1        if((1 == RI) && (0 == flag))  //½ÓÊÕµ½ÐÂ×Ö½Ú
+  26   1        {
+  27   2          rec_dat = SBUF;
+  28   2          if((rec_dat == '\n') && (rec_buf[i - 1] == '\r'))
+  29   2          {
+  30   3            rec_buf[i - 1] = '\0'; // \r µÄÎ»ÖÃµÈÓÚ½áÊø·û
+  31   3            i = 0;
+  32   3            flag = 1;
+  33   3          }
+  34   2          else
+  35   2          {
+  36   3            rec_buf[i] = rec_dat;
+  37   3            i++;
+  38   3          }
+  39   2        }
+  40   1        RI = 0;
+  41   1      }
+  42          
+  43          
+  44          ///* ´®¿ÚÊý¾ÝÐ´Èë£¬¼´´®¿Ú·¢ËÍº¯Êý£¬buf-´ý·¢ËÍÊý¾ÝµÄÖ¸Õë£¬len-Ö¸¶¨µÄ·¢ËÍ³¤¶È */
+  45          //void Uart_Write(u8 *buf, u8 len)
+  46          //{
+  47          //  while(len--)  //Ñ­»··¢ËÍËùÓÐ×Ö½Ú
+  48          //  {
+  49          //    flagTxd = 0;      //ÇåÁã·¢ËÍ±êÖ¾
+  50          //    SBUF = *buf++;    //·¢ËÍÒ»¸ö×Ö½ÚÊý¾Ý
+  51          //    while(!flagTxd);  //µÈ´ý¸Ã×Ö½Ú·¢ËÍÍê³É
+  52          //  } 
+  53          //}
+  54          
+C51 COMPILER V9.60.7.0   UART                                                              10/24/2023 19:07:34 PAGE 2   
+
+  55          ///* ´®¿ÚÊý¾Ý¶ÁÈ¡º¯Êý£¬buf-½ÓÊÕÖ¸Õë£¬len-Ö¸¶¨µÄ¶ÁÈ¡³¤¶È£¬·µ»ØÖµ-Êµ¼Ê¶Áµ½µÄ³¤¶È */
+  56          //u8 UartRead(u8 *buf, u8 len)
+  57          //{
+  58          //  u8 i = 0;
+  59          //  if(len > cntRxd) //Ö¸¶¨¶ÁÈ¡³¤¶È´óÓÚÊµ¼Ê½ÓÊÕµ½µÄÊý¾Ý³¤¶ÈÊ±
+  60          //  {
+  61          //    len = cntRxd;  //¶ÁÈ¡³¤¶ÈÉèÖÃÎªÊµ¼Ê½ÓÊÕµ½µÄÊý¾Ý³¤¶È
+  62          //  }
+  63          //  for(i = 0; i < len; i++) //¿½±´½ÓÊÕµ½µÄÊý¾Ýµ½½ÓÊÕÖ¸ÕëÉÏ
+  64          //  {
+  65          //    *buf++ = bufRxd[i];
+  66          //  }
+  67          //  cntRxd = 0; //½ÓÊÕ¼ÆÊýÆ÷ÇåÁã
+  68          //  return len; //·µ»ØÊµ¼Ê¶ÁÈ¡³¤¶È
+  69          //}
+  70          
+  71          ///* ´®¿Ú½ÓÊÕ¼à¿Ø£¬ÓÉ¿ÕÏÐÊ±¼äÅÐ¶¨Ö¡½áÊø£¬ÐèÔÚ¶¨Ê±ÖÐ¶ÏÖÐµ÷ÓÃ£¬ms-¶¨Ê±¼ä¸ô */
+  72          //void Uart_RxMonitor(u8 ms)
+  73          //{
+  74          //  static u8 cntbkp = 0;   //Ç°Ò»´Î½ÓÊÕµ½Êý¾ÝµÄ³¤¶È
+  75          //  static u8 idletmr = 0;  //¿ÕÏÐ¼ÆÊ±
+  76          
+  77          //  if(cntRxd > 0)          //½ÓÊÕ¼ÆÊýÆ÷´óÓÚÁãÊ±£¬¼à¿Ø×ÜÏß¿ÕÏÐÊ±¼ä
+  78          //  {
+  79          //    if(cntbkp != cntRxd)  //½ÓÊÕ¼ÆÊýÆ÷¸Ä±ä£¬¼´¸Õ½ÓÊÕµ½Êý¾ÝÊ±£¬ÇåÁã¿ÕÏÐ¼ÆÊ±(ÓëÇ°Ò»´Î½ÓÊÕµ½µÄÊý¾Ý³¤¶È²»Ò»Ñù´
+             -ú±í½ÓÊÕµ½Êý¾Ý)
+  80          //    {
+  81          //      cntbkp = cntRxd;    //°Ñ±¾´Î½ÓÊÕµ½Êý¾Ý¸³¸øÇ°Ò»´Î½ÓÊÕµ½µÄÊý¾Ý
+  82          //      idletmr = 0;
+  83          //    }
+  84          //    else                  //½ÓÊÕ¼ÆÊýÆ÷Î´¸Ä±ä£¬¼´×ÜÏß¿ÕÏÐÊ±£¬ÀÛ»ý¿ÕÏÐÊ±¼ä
+  85          //    {
+  86          //      if(idletmr < 30)    //¿ÕÏÐ¼ÆÊ±Ð¡ÓÚ 30ms Ê±£¬³ÖÐøÀÛ¼Ó
+  87          //      {
+  88          //        idletmr += ms;
+  89          //        if(idletmr >= 30) //¿ÕÏÐÊ±¼ä´ïµ½ 30ms Ê±£¬¼´ÅÐ¶¨ÎªÒ»Ö¡½ÓÊÕÍê±Ï
+  90          //        {
+  91          //          flagFrame = 1;  //ÉèÖÃÖ¡½ÓÊÕÍê³É±êÖ¾
+  92          //        }
+  93          //      }
+  94          //    }
+  95          //  }
+  96          //  else
+  97          //    cntbkp = 0;
+  98          //}
+  99          
+ 100          ///* ´®¿ÚÇý¶¯º¯Êý£¬¼à²âÊý¾ÝÖ¡µÄ½ÓÊÕ£¬µ÷¶È¹¦ÄÜº¯Êý£¬ÐèÔÚÖ÷Ñ­»·ÖÐµ÷ÓÃ */
+ 101          //void Uart_Driver()
+ 102          //{
+ 103          //  u8 len;
+ 104          //  u8 pdata buf[40]; //Êý¾Ý»º³åÇø
+ 105          //  if(flagFrame)     //ÓÐÃüÁîµ½´ïÊ±£¬¶ÁÈ¡´¦Àí¸ÃÃüÁî
+ 106          //  {
+ 107          //    flagFrame = 0;
+ 108          //    len = UartRead(buf,sizeof(buf)); //½«½ÓÊÕµ½µÄÃüÁî¶ÁÈ¡µ½»º³åÇøÖÐ
+ 109          //    Uart_Action(buf, len);           //´«µÝÊý¾ÝÖ¡£¬µ÷ÓÃ¶¯×÷Ö´ÐÐº¯Êý
+ 110          //  }
+ 111          //}
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     98    ----
+C51 COMPILER V9.60.7.0   UART                                                              10/24/2023 19:07:34 PAGE 3   
+
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     11    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

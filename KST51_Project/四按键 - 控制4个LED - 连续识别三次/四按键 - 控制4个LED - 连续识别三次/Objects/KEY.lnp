@@ -1,0 +1,6 @@
+".\Objects\STARTUP.obj",
+".\Objects\main.obj",
+".\Objects\key.obj",
+".\Objects\delay.obj" 
+TO ".\Objects\KEY" 
+PRINT(".\Listings\KEY.m51") RAMSIZE(256) 
